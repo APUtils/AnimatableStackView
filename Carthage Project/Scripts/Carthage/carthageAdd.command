@@ -34,18 +34,16 @@ cd ..
 
 # Try one level up if didn't find Cartfile.
 if [ ! -f "Cartfile" ]; then
+    project_dir="${PWD##*/}"
     cd ..
 
     if [ ! -f "Cartfile" ]; then
         printf >&2 "\n${red_color}Unable to locate 'Cartfile'${no_color}\n\n"
         exit 1
     fi
-
-    scripts_dir="${PWD##*/}/Scripts/Carthage"
-
-else
-    scripts_dir="Scripts/Carthage"
 fi
+
+scripts_dir="Scripts/Carthage"
 
 github_framework=$1
 git_mark=$2
@@ -110,6 +108,11 @@ else
     printf "\n$line_to_add" >> "Cartfile"
     sort -u "Cartfile" -o "Cartfile"
     sed -i '' '/^$/d' "Cartfile"
+fi
+
+# Restore working directory
+if [ ! -z "${project_dir}" ]; then
+    cd "${project_dir}"
 fi
 
 # Clone and build

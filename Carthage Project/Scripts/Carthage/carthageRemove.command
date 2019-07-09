@@ -20,18 +20,16 @@ cd ..
 
 # Try one level up if didn't find Cartfile.
 if [ ! -f "Cartfile" ]; then
+    project_dir="${PWD##*/}"
     cd ..
 
     if [ ! -f "Cartfile" ]; then
         printf >&2 "\n${red_color}Unable to locate 'Cartfile'${no_color}\n\n"
         exit 1
     fi
-
-    scripts_dir="${PWD##*/}/Scripts/Carthage"
-
-else
-    scripts_dir="Scripts/Carthage"
 fi
+
+scripts_dir="Scripts/Carthage"
 
 # Requires `xcodeproj` installed - https://github.com/CocoaPods/Xcodeproj
 # sudo gem install xcodeproj
@@ -62,6 +60,11 @@ if [ -z $framework_name ]; then
 
     # Asking which one to update
     read -p "Which framework to remove? " framework_name
+fi
+
+# Restore working directory
+if [ ! -z "${project_dir}" ]; then
+    cd "${project_dir}"
 fi
 
 if [ -z $framework_name ]; then

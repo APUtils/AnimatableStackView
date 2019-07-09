@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		333952BEBCC60FD771D2A75A /* APExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */; };
 		E202681822117D03004CC28A /* AnimatableStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = E202681622117D03004CC28A /* AnimatableStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E275E06F229FF84E00E9900C /* AnimatableStackView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; };
 		E275E08322A03A8900E9900C /* AnimatableStackView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; };
@@ -73,6 +74,7 @@
 		AA18C772BA5A02B7FC61455E /* podPush.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = podPush.command; path = ../podPush.command; sourceTree = "<group>"; };
 		BBEAEE1CEDCDB589B0028A4A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BF5EA2ED4007722F969C81B7 /* .travis.yml */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APExtensions.framework; path = Carthage/Build/iOS/APExtensions.framework; sourceTree = "<group>"; };
 		E202681322117D03004CC28A /* AnimatableStackView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnimatableStackView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E202681622117D03004CC28A /* AnimatableStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatableStackView.h; sourceTree = "<group>"; };
 		E202681722117D03004CC28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E275E08322A03A8900E9900C /* AnimatableStackView.framework in Frameworks */,
+				333952BEBCC60FD771D2A75A /* APExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				1834AC72A69DC91E1F3B8EDA /* _Carthage */,
+				C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */,
 				E2A7396D2260D99900E97D55 /* Nimble.framework */,
 				E2A7396C2260D99900E97D55 /* Quick.framework */,
 			);
@@ -408,11 +412,13 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/APExtensions.framework",
 			);
 			name = "Carthage Copy";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/APExtensions.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

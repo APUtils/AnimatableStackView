@@ -18,7 +18,7 @@ final class ViewController: UIViewController {
     
     // ******************************* MARK: - Private Properties
     
-    private let stackView: AnimatableStackView<UILabel, String>! = .init()
+    private let stackView: AnimatableStackView! = .init()
     private let vms1 = ["1", "2", "3"]
     private let vms2 = ["3", "2", "1", "4", "5"]
     

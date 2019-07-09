@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // TODO: Documentation
-public final class AnimatableStackView<View: AnimatableStackView_View, ViewModel>: UIStackView where View == ViewModel.ViewClass, View.ViewModel == ViewModel {
+public final class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Private Properties
     
@@ -46,14 +46,14 @@ public final class AnimatableStackView<View: AnimatableStackView_View, ViewModel
         
         // Delete
         viewsToDelete = views
-        viewsToDelete.removeAll(where: allNewViews.contains)
+        viewsToDelete.removeAll { viewToDelete in allNewViews.contains { $0.id == viewToDelete.id } }
         
         //// 2. Insert new views collapsed at proper positions depending on old views layout.
         viewsToInsert.forEach { view in
             let originY: CGFloat
             if views.isEmpty {
                 originY = 0
-            } else if let index = allNewViews.firstIndex(of: view) {
+            } else if let index = allNewViews.firstIndex(where: { $0.id == view.id }) {
                 let clampedIndex = min(views.endIndex - 1, index)
                 originY = views[clampedIndex].frame.maxY
             } else {
@@ -82,7 +82,7 @@ public final class AnimatableStackView<View: AnimatableStackView_View, ViewModel
         let animationDuration = UIView.inheritedAnimationDuration
         let delayTime: DispatchTime = .now() + animationDuration
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
-            viewsToDelete.forEach(self.removeSubview)
+            viewsToDelete.forEach { self.removeSubview($0) }
         }
         
         //// 4. Update existing views
@@ -101,7 +101,7 @@ public final class AnimatableStackView<View: AnimatableStackView_View, ViewModel
             allNewViewsWithDeletedViews.insert(view, at: previousIndex)
         }
         
-        allNewViewsWithDeletedViews.forEach(addArrangedSubview)
+        allNewViewsWithDeletedViews.forEach { self.addArrangedSubview($0) }
         views = allNewViews
     }
     

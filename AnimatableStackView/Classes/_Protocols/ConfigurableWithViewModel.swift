@@ -10,6 +10,5 @@ import Foundation
 
 // TODO: Documentation
 public protocol ConfigurableWithViewModel {
-    associatedtype ViewModel
-    func configure(viewModel: ViewModel)
+    func configure(viewModel: Any)
 }

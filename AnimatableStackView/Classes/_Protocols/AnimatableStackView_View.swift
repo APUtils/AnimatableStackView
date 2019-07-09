@@ -10,4 +10,9 @@ import Foundation
 import UIKit
 
 // TODO: Documentation
-public protocol AnimatableStackView_View: CreatableWithViewModel, Identifiable where Self: UIView, ViewModel: AnimatableStackView_ViewModel {}
+public protocol AnimatableStackView_View: CreatableWithViewModel, Identifiable where Self: UIView {}
+
+public extension AnimatableStackView {
+    // TODO: Documentation
+    typealias View = AnimatableStackView_View
+}

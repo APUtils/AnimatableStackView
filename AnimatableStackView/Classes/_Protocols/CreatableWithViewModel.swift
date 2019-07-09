@@ -10,5 +10,5 @@ import Foundation
 
 // TODO: Documentation
 public protocol CreatableWithViewModel: ConfigurableWithViewModel {
-    static func create(viewModel: ViewModel) -> Self
+    static func create(viewModel: Any) -> Self
 }

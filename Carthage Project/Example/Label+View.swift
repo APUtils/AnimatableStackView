@@ -11,11 +11,11 @@ import AnimatableStackView
 
 
 extension UILabel: AnimatableStackView_View {
-    public func configure(viewModel: String) {
-        text = viewModel
+    public func configure(viewModel: Any) {
+        text = viewModel as? String
     }
     
-    public static func create(viewModel: UILabel.ViewModel) -> Self {
+    public static func create(viewModel: Any) -> Self {
         let label = self.init()
         label.contentMode = .top
         label.backgroundColor = .random
@@ -34,9 +34,7 @@ extension UILabel: AnimatableStackView_View {
 }
 
 extension String: AnimatableStackView_ViewModel {
-    public static var viewClass: UILabel.Type = UILabel.self
-    
-    public typealias ViewClass = UILabel
+    public static var viewClass: AnimatableStackView_View.Type = UILabel.self
     
     public var id: String {
         return self

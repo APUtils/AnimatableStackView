@@ -10,6 +10,10 @@ import Foundation
 
 // TODO: Documentation
 public protocol AnimatableStackView_ViewModel: Identifiable {
-    associatedtype ViewClass where ViewClass: AnimatableStackView_View
-    static var viewClass: ViewClass.Type { get }
+    static var viewClass: AnimatableStackView_View.Type { get }
+}
+
+public extension AnimatableStackView {
+    // TODO: Documentation
+    typealias ViewModel = AnimatableStackView_ViewModel
 }

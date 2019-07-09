@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol Identifiable {
-    var id: String? { get }
+public protocol Identifiable {
+    var id: String { get }
 }

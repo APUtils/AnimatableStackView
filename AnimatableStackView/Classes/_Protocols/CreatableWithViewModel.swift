@@ -9,6 +9,6 @@
 import Foundation
 
 // TODO: Documentation
-protocol CreatableWithViewModel: ConfigurableWithViewModel {
+public protocol CreatableWithViewModel: ConfigurableWithViewModel {
     static func create(viewModel: ViewModel) -> Self
 }

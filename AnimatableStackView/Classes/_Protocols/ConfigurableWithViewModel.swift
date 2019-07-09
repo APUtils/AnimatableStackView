@@ -9,7 +9,7 @@
 import Foundation
 
 // TODO: Documentation
-protocol ConfigurableWithViewModel {
+public protocol ConfigurableWithViewModel {
     associatedtype ViewModel
     func configure(viewModel: ViewModel)
 }

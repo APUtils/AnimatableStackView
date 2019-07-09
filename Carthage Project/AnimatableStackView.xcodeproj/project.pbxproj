@@ -18,6 +18,7 @@
 		E28D75BD22D49BC6008FC13A /* AnimatableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */; };
 		E28D75BF22D49C52008FC13A /* AnimatableStackView_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75BE22D49C52008FC13A /* AnimatableStackView_View.swift */; };
 		E28D75C122D49C9D008FC13A /* AnimatableStackView_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75C022D49C9D008FC13A /* AnimatableStackView_ViewModel.swift */; };
+		E28D75C622D4CA87008FC13A /* Label+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75C522D4CA87008FC13A /* Label+View.swift */; };
 		E2A7394E2260CFC700E97D55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7394D2260CFC700E97D55 /* AppDelegate.swift */; };
 		E2A739502260CFC700E97D55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7394F2260CFC700E97D55 /* ViewController.swift */; };
 		E2A739532260CFC700E97D55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A739512260CFC700E97D55 /* Main.storyboard */; };
@@ -84,6 +85,7 @@
 		E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView.swift; sourceTree = "<group>"; };
 		E28D75BE22D49C52008FC13A /* AnimatableStackView_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView_View.swift; sourceTree = "<group>"; };
 		E28D75C022D49C9D008FC13A /* AnimatableStackView_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView_ViewModel.swift; sourceTree = "<group>"; };
+		E28D75C522D4CA87008FC13A /* Label+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+View.swift"; sourceTree = "<group>"; };
 		E2A7394B2260CFC700E97D55 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A7394D2260CFC700E97D55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A7394F2260CFC700E97D55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -173,8 +175,8 @@
 		E2766F332260FFF7003BDA19 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */,
 				E28D75B422D49B45008FC13A /* _Protocols */,
+				E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */,
 			);
 			name = Sources;
 			path = ../../AnimatableStackView/Classes;
@@ -201,6 +203,7 @@
 				E2A739542260CFC800E97D55 /* Assets.xcassets */,
 				E2A739562260CFC800E97D55 /* LaunchScreen.storyboard */,
 				E2A739592260CFC800E97D55 /* Info.plist */,
+				E28D75C522D4CA87008FC13A /* Label+View.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2A739502260CFC700E97D55 /* ViewController.swift in Sources */,
+				E28D75C622D4CA87008FC13A /* Label+View.swift in Sources */,
 				E2A7394E2260CFC700E97D55 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

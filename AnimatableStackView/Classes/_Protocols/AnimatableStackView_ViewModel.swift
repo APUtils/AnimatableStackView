@@ -9,7 +9,7 @@
 import Foundation
 
 // TODO: Documentation
-protocol AnimatableStackView_ViewModel: Identifiable {
-    associatedtype ViewClass = AnimatableStackView_View.Type
-    static var viewClass: ViewClass { get }
+public protocol AnimatableStackView_ViewModel: Identifiable {
+    associatedtype ViewClass where ViewClass: AnimatableStackView_View
+    static var viewClass: ViewClass.Type { get }
 }

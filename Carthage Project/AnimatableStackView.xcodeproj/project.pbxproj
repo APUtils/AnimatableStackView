@@ -11,6 +11,12 @@
 		E275E06F229FF84E00E9900C /* AnimatableStackView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; };
 		E275E08322A03A8900E9900C /* AnimatableStackView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; };
 		E275E08422A03A8900E9900C /* AnimatableStackView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E28D75B622D49B61008FC13A /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75B522D49B61008FC13A /* Identifiable.swift */; };
+		E28D75B822D49B97008FC13A /* ConfigurableWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75B722D49B97008FC13A /* ConfigurableWithViewModel.swift */; };
+		E28D75BA22D49BAC008FC13A /* CreatableWithViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75B922D49BAC008FC13A /* CreatableWithViewModel.swift */; };
+		E28D75BD22D49BC6008FC13A /* AnimatableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */; };
+		E28D75BF22D49C52008FC13A /* AnimatableStackView_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75BE22D49C52008FC13A /* AnimatableStackView_View.swift */; };
+		E28D75C122D49C9D008FC13A /* AnimatableStackView_ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D75C022D49C9D008FC13A /* AnimatableStackView_ViewModel.swift */; };
 		E2A7394E2260CFC700E97D55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7394D2260CFC700E97D55 /* AppDelegate.swift */; };
 		E2A739502260CFC700E97D55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A7394F2260CFC700E97D55 /* ViewController.swift */; };
 		E2A739532260CFC700E97D55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A739512260CFC700E97D55 /* Main.storyboard */; };
@@ -53,23 +59,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2348B7AD6FC366A029681D4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2348B7AD6FC366A029681D4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		27A65933230C2FF4F758F562 /* carthageUpdate.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
-		281AEF37AD4816ADC749CC56 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; };
-		48CC95EDC70BE1E764501060 /* .gitignore */ = {isa = PBXFileReference; includeInIndex = 1; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
-		52C1F6B509E3F0AA0E0B9A82 /* checkBuild.command */ = {isa = PBXFileReference; includeInIndex = 1; name = checkBuild.command; path = ../checkBuild.command; sourceTree = "<group>"; };
-		53E0A218D7BD7E552B66F1A1 /* podCheck.command */ = {isa = PBXFileReference; includeInIndex = 1; name = podCheck.command; path = ../podCheck.command; sourceTree = "<group>"; };
-		7091B72A1B5466A1642E2CE7 /* .cocoadocs.yml */ = {isa = PBXFileReference; includeInIndex = 1; name = .cocoadocs.yml; path = ../.cocoadocs.yml; sourceTree = "<group>"; };
+		281AEF37AD4816ADC749CC56 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; };
+		48CC95EDC70BE1E764501060 /* .gitignore */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		52C1F6B509E3F0AA0E0B9A82 /* checkBuild.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = checkBuild.command; path = ../checkBuild.command; sourceTree = "<group>"; };
+		53E0A218D7BD7E552B66F1A1 /* podCheck.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = podCheck.command; path = ../podCheck.command; sourceTree = "<group>"; };
+		7091B72A1B5466A1642E2CE7 /* .cocoadocs.yml */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = .cocoadocs.yml; path = ../.cocoadocs.yml; sourceTree = "<group>"; };
 		722BFDE9DE58393B9D916719 /* carthageRemove.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageRemove.command; path = Scripts/Carthage/carthageRemove.command; sourceTree = "<group>"; };
 		75997ED1E9FAC56B9BEC3F0E /* carthageAdd.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageAdd.command; path = Scripts/Carthage/carthageAdd.command; sourceTree = "<group>"; };
-		8D50CBB4AB2B0873C4593148 /* DEPLOY PROCESS.md */ = {isa = PBXFileReference; includeInIndex = 1; name = "DEPLOY PROCESS.md"; path = "../DEPLOY PROCESS.md"; sourceTree = "<group>"; };
-		9068E020B515F676553BAE79 /* CHANGELOG.md */ = {isa = PBXFileReference; includeInIndex = 1; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
-		AA18C772BA5A02B7FC61455E /* podPush.command */ = {isa = PBXFileReference; includeInIndex = 1; name = podPush.command; path = ../podPush.command; sourceTree = "<group>"; };
-		BBEAEE1CEDCDB589B0028A4A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		BF5EA2ED4007722F969C81B7 /* .travis.yml */ = {isa = PBXFileReference; includeInIndex = 1; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		8D50CBB4AB2B0873C4593148 /* DEPLOY PROCESS.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = "DEPLOY PROCESS.md"; path = "../DEPLOY PROCESS.md"; sourceTree = "<group>"; };
+		9068E020B515F676553BAE79 /* CHANGELOG.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
+		AA18C772BA5A02B7FC61455E /* podPush.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = podPush.command; path = ../podPush.command; sourceTree = "<group>"; };
+		BBEAEE1CEDCDB589B0028A4A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		BF5EA2ED4007722F969C81B7 /* .travis.yml */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		E202681322117D03004CC28A /* AnimatableStackView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnimatableStackView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E202681622117D03004CC28A /* AnimatableStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatableStackView.h; sourceTree = "<group>"; };
 		E202681722117D03004CC28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E28D75B522D49B61008FC13A /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		E28D75B722D49B97008FC13A /* ConfigurableWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableWithViewModel.swift; sourceTree = "<group>"; };
+		E28D75B922D49BAC008FC13A /* CreatableWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatableWithViewModel.swift; sourceTree = "<group>"; };
+		E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView.swift; sourceTree = "<group>"; };
+		E28D75BE22D49C52008FC13A /* AnimatableStackView_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView_View.swift; sourceTree = "<group>"; };
+		E28D75C022D49C9D008FC13A /* AnimatableStackView_ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView_ViewModel.swift; sourceTree = "<group>"; };
 		E2A7394B2260CFC700E97D55 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A7394D2260CFC700E97D55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2A7394F2260CFC700E97D55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,9 +170,23 @@
 		E2766F332260FFF7003BDA19 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */,
+				E28D75B422D49B45008FC13A /* _Protocols */,
 			);
 			name = Sources;
 			path = ../../AnimatableStackView/Classes;
+			sourceTree = "<group>";
+		};
+		E28D75B422D49B45008FC13A /* _Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E28D75BE22D49C52008FC13A /* AnimatableStackView_View.swift */,
+				E28D75C022D49C9D008FC13A /* AnimatableStackView_ViewModel.swift */,
+				E28D75B722D49B97008FC13A /* ConfigurableWithViewModel.swift */,
+				E28D75B922D49BAC008FC13A /* CreatableWithViewModel.swift */,
+				E28D75B522D49B61008FC13A /* Identifiable.swift */,
+			);
+			path = _Protocols;
 			sourceTree = "<group>";
 		};
 		E2A7394C2260CFC700E97D55 /* Example */ = {
@@ -297,6 +323,7 @@
 				TargetAttributes = {
 					E202681222117D03004CC28A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					E2A7394A2260CFC700E97D55 = {
 						CreatedOnToolsVersion = 10.1;
@@ -307,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E202680D22117D03004CC28A /* Build configuration list for PBXProject "PROJECTNAME" */;
+			buildConfigurationList = E202680D22117D03004CC28A /* Build configuration list for PBXProject "AnimatableStackView" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -416,6 +443,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28D75B622D49B61008FC13A /* Identifiable.swift in Sources */,
+				E28D75BA22D49BAC008FC13A /* CreatableWithViewModel.swift in Sources */,
+				E28D75BF22D49C52008FC13A /* AnimatableStackView_View.swift in Sources */,
+				E28D75B822D49B97008FC13A /* ConfigurableWithViewModel.swift in Sources */,
+				E28D75C122D49C9D008FC13A /* AnimatableStackView_ViewModel.swift in Sources */,
+				E28D75BD22D49BC6008FC13A /* AnimatableStackView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,7 +556,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -582,7 +615,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -652,6 +685,7 @@
 		E2A739652260CFC800E97D55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -659,7 +693,6 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -673,6 +706,7 @@
 		E2A739662260CFC800E97D55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -680,7 +714,6 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,7 +773,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E202680D22117D03004CC28A /* Build configuration list for PBXProject "PROJECTNAME" */ = {
+		E202680D22117D03004CC28A /* Build configuration list for PBXProject "AnimatableStackView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E202681922117D03004CC28A /* Debug */,

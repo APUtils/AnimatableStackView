@@ -143,7 +143,6 @@
 				7683386C1CFE5AF5553F7753 /* Pods-AnimatableStackView_Tests.debug.xcconfig */,
 				4CDD5BC74F4D79D3BC1DE97D /* Pods-AnimatableStackView_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

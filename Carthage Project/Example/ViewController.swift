@@ -14,11 +14,10 @@ final class ViewController: UIViewController {
     
     // ******************************* MARK: - @IBOutlets
     
-    @IBOutlet private weak var stackViewContainer: UIView!
+    @IBOutlet private weak var stackView: AnimatableStackView!
     
     // ******************************* MARK: - Private Properties
     
-    private let stackView: AnimatableStackView! = .init()
     private let vms1 = ["1", "2", "3"]
     private let vms2 = ["3", "2", "1", "4", "5"]
     
@@ -27,20 +26,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupStackView()
-    }
-    
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
         
-        stackViewContainer.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: stackViewContainer.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: stackViewContainer.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: stackViewContainer.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: stackViewContainer.bottomAnchor)
-            ])
     }
     
     // ******************************* MARK: - Actions

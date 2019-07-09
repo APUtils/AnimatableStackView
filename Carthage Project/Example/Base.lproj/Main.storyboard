@@ -18,9 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="D72-1h-bcW">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D72-1h-bcW">
                                 <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0b7-5B-ucJ" customClass="AnimatableStackView" customModule="AnimatableStackView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0b7-5B-ucJ" firstAttribute="top" secondItem="D72-1h-bcW" secondAttribute="top" id="BBy-AU-yMg"/>
+                                    <constraint firstItem="0b7-5B-ucJ" firstAttribute="leading" secondItem="D72-1h-bcW" secondAttribute="leading" id="G0Z-Uq-dn9"/>
+                                    <constraint firstAttribute="bottom" secondItem="0b7-5B-ucJ" secondAttribute="bottom" id="v0t-Uq-Rx7"/>
+                                    <constraint firstAttribute="trailing" secondItem="0b7-5B-ucJ" secondAttribute="trailing" id="yFE-FB-X1a"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-4F-bmn">
                                 <rect key="frame" x="178.5" y="433" width="57" height="30"/>
@@ -41,7 +52,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="stackViewContainer" destination="D72-1h-bcW" id="XwW-1f-79i"/>
+                        <outlet property="stackView" destination="0b7-5B-ucJ" id="mYm-sm-MXI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

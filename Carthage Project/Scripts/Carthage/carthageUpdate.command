@@ -33,10 +33,10 @@ if [ ! -f "Cartfile" ]; then
         exit 1
     fi
 
-    scripts_dir="${PWD##*/}/Scripts/Carthage/"
+    scripts_dir="${PWD##*/}/Scripts/Carthage"
 
 else
-    scripts_dir="Scripts/Carthage/"
+    scripts_dir="Scripts/Carthage"
 fi
 
 framework_name=$1

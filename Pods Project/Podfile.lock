@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: f35604e6e85510ea8497306dcf7a3d06dc88f672
+  AnimatableStackView: 3d38efb6ecf4539bcf206f65f79d1fe79b642ca0
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   iOSSnapshotTestCase: 415bd84f9dbba4ff45fede49d800bc7332fbedac
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37

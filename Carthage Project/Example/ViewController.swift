@@ -46,13 +46,13 @@ final class ViewController: UIViewController {
     // ******************************* MARK: - Actions
     
     @IBAction private func onAnimateTap(_ sender: Any) {
-        g.animate(2) {
+        UIView.animate(withDuration: 2) {
             self.stackView.configure(viewModels: self.vms1)
             self.view.layoutIfNeeded()
         }
         
         g.asyncMain(2) {
-            g.animate(2) {
+            UIView.animate(withDuration: 2) {
                 self.stackView.configure(viewModels: self.vms2)
                 self.view.layoutIfNeeded()
             }

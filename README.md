@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/AnimatableStackView.svg?style=flat)](http://cocoapods.org/pods/AnimatableStackView)
 [![CI Status](http://img.shields.io/travis/APUtils/AnimatableStackView.svg?style=flat)](https://travis-ci.org/APUtils/AnimatableStackView)
 
-TODO
+UIStackView based class that allows to animate its changes
 
 ## Example
 
@@ -14,9 +14,7 @@ Clone the repo and then open `Carthage Project/AnimatableStackView.xcodeproj`
 
 ## GIF animation
 
-TODO
-
-<img src="Example/AnimatableStackView/<#NAME#>.gif"/>
+<img src="Gifs/1.gif"/>
 
 ## Installation
 
@@ -41,7 +39,13 @@ pod 'AnimatableStackView', '~> 1.0'
 
 ## Usage
 
-TODO
+Just call `.configure(viewModels:)` method with new view models and then perform layout inside animation block:
+```swift
+UIView.animate(withDuration: 2) {
+    self.stackView.configure(viewModels: self.vms1)
+    self.view.layoutIfNeeded()
+}
+```
 
 See example and test projects for more details.
 

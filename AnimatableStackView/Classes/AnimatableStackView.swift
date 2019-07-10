@@ -14,7 +14,7 @@ public final class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Private Properties
     
-    private var views: [View] = []
+    public private(set) var views: [View] = []
     
     // ******************************* MARK: - Configuration
     
@@ -103,6 +103,12 @@ public final class AnimatableStackView: UIStackView {
         
         allNewViewsWithDeletedViews.forEach { self.addArrangedSubview($0) }
         views = allNewViews
+    }
+    
+    // ******************************* MARK: - Public Methods
+    
+    public func getView(identity: Identifiable) -> View? {
+        return views.first { $0.id == identity.id }
     }
     
     // ******************************* MARK: - Private Methods

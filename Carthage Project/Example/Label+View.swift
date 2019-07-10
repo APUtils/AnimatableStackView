@@ -34,7 +34,9 @@ extension UILabel: AnimatableStackView_View {
 }
 
 extension String: AnimatableStackView_ViewModel {
-    public static var viewClass: AnimatableStackView_View.Type = UILabel.self
+    public var viewClass: AnimatableStackView_View.Type {
+        return UILabel.self
+    }
     
     public var id: String {
         return self

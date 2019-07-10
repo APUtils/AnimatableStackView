@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // TODO: Documentation
-public final class AnimatableStackView: UIStackView {
+open class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Private Properties
     
@@ -18,7 +18,7 @@ public final class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Configuration
     
-    public func configure(viewModels: [ViewModel]) {
+    open func configure(viewModels: [ViewModel]) {
         //// 1. Iterate over all viewModels and find:
         // - New views
         // - Deleted views
@@ -35,8 +35,7 @@ public final class AnimatableStackView: UIStackView {
                 viewsToUpdate.append(view)
             } else {
                 // New
-                let viewModelType = type(of: viewModel)
-                let viewClass = viewModelType.viewClass
+                let viewClass = viewModel.viewClass
                 view = viewClass.create(viewModel: viewModel)
                 viewsToInsert.append(view)
             }
@@ -49,6 +48,9 @@ public final class AnimatableStackView: UIStackView {
         viewsToDelete.removeAll { viewToDelete in allNewViews.contains { $0.id == viewToDelete.id } }
         
         //// 2. Insert new views collapsed at proper positions depending on old views layout.
+        
+        clear()
+        
         viewsToInsert.forEach { view in
             let originY: CGFloat
             if views.isEmpty {
@@ -75,23 +77,7 @@ public final class AnimatableStackView: UIStackView {
             }
         }
         
-        //// 3. Hide deleted views and remove them from arranged subviews after animation is done.
-        // Note: Async is unsafe and can be improved later with additional checks if needed.
-        viewsToDelete.forEach { $0.isHidden = true }
-        
-        let animationDuration = UIView.inheritedAnimationDuration
-        let delayTime: DispatchTime = .now() + animationDuration
-        DispatchQueue.main.asyncAfter(deadline: delayTime) {
-            viewsToDelete.forEach { self.removeSubview($0) }
-        }
-        
-        //// 4. Update existing views
-        viewsToUpdate.forEach { view in
-            guard let viewModel = viewModels.first(where: { $0.id == view.id }) else { return }
-            view.configure(viewModel: viewModel)
-        }
-        
-        clear()
+        //// 3. Insert all views
         
         // Keep deleting views as arranged subviews until they are dismissed.
         var allNewViewsWithDeletedViews = allNewViews
@@ -102,12 +88,29 @@ public final class AnimatableStackView: UIStackView {
         }
         
         allNewViewsWithDeletedViews.forEach { self.addArrangedSubview($0) }
+        
+        //// 4. Hide deleted views and remove them from arranged subviews after animation is done.
+        // Note: Async is unsafe and can be improved later with additional checks if needed.
+        viewsToDelete.forEach { $0.isHidden = true }
+        
+        let animationDuration = UIView.inheritedAnimationDuration
+        let delayTime: DispatchTime = .now() + animationDuration
+        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+            viewsToDelete.forEach { self.removeSubview($0) }
+        }
+        
+        //// 5. Update existing views
+        viewsToUpdate.forEach { view in
+            guard let viewModel = viewModels.first(where: { $0.id == view.id }) else { return }
+            view.configure(viewModel: viewModel)
+        }
+        
         views = allNewViews
     }
     
     // ******************************* MARK: - Public Methods
     
-    public func getView(identity: Identifiable) -> View? {
+    open func getView(identity: Identifiable) -> View? {
         return views.first { $0.id == identity.id }
     }
     

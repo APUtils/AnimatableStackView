@@ -10,7 +10,7 @@ import Foundation
 
 // TODO: Documentation
 public protocol AnimatableStackView_ViewModel: Identifiable {
-    static var viewClass: AnimatableStackView_View.Type { get }
+    var viewClass: AnimatableStackView_View.Type { get }
 }
 
 public extension AnimatableStackView {

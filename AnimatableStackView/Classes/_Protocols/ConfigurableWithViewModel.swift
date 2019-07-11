@@ -8,7 +8,7 @@
 
 import Foundation
 
-// TODO: Documentation
+/// Objects conforming to that protocol are able to be configured with view model.
 public protocol ConfigurableWithViewModel {
     func configure(viewModel: Any)
 }

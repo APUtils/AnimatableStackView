@@ -1,5 +1,5 @@
 PODS:
-  - AnimatableStackView (2.0.0)
+  - AnimatableStackView (3.0.0)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: 6234db75b416e9f2ffc01b5c717575618a1724a6
+  AnimatableStackView: 4164d386a129347663a646ff20b62778d7e0fb3c
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   iOSSnapshotTestCase: 415bd84f9dbba4ff45fede49d800bc7332fbedac
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Object that can be identified using ID.
 public protocol Identifiable {
     var id: String { get }
 }

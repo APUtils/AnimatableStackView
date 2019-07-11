@@ -98,6 +98,7 @@
 		E2A739642260CFC800E97D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A7396C2260D99900E97D55 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		E2A7396D2260D99900E97D55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		E2CD103122D7928D00CDB64C /* podInstall.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = podInstall.command; path = "../Pods Project/Scripts/Cocoapods/podInstall.command"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +232,7 @@
 				52C1F6B509E3F0AA0E0B9A82 /* checkBuild.command */,
 				53E0A218D7BD7E552B66F1A1 /* podCheck.command */,
 				AA18C772BA5A02B7FC61455E /* podPush.command */,
+				E2CD103122D7928D00CDB64C /* podInstall.command */,
 			);
 			name = _;
 			sourceTree = "<group>";

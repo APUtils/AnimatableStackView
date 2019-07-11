@@ -9,15 +9,24 @@
 import Foundation
 import UIKit
 
-// TODO: Documentation
+/// Ordinary stack view that supports animations.
+/// Just perform changes using `configure(viewModels:)`
+/// and then call `view.layoutIfNeeded()` inside animation block.
 open class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Private Properties
     
+    /// Array of `Views` that stack view currently displaying.
     public private(set) var views: [View] = []
     
     // ******************************* MARK: - Configuration
     
+    /// Core method to configure stack view's arranged subviews.
+    /// Should be called inside animation block and `layoutIfNeeded()`
+    /// should be called on base view, e.g. view controller's view
+    /// for animations to work.
+    /// - parameter viewModels: View models that will be used to configure a new state.
+    /// Views will be reused or created whenever needed and properly attacked so animation will be smooth.
     open func configure(viewModels: [ViewModel]) {
         //// 1. Iterate over all viewModels and find:
         // - New views
@@ -110,6 +119,7 @@ open class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Public Methods
     
+    /// Find view that corresponds to passed identity. E.g. you can pass view model and get view for that.
     open func getView(identity: Identifiable) -> View? {
         return views.first { $0.id == identity.id }
     }

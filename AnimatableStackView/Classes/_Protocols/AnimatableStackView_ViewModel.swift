@@ -8,12 +8,12 @@
 
 import Foundation
 
-// TODO: Documentation
+/// View model that has ID and view class to which it belong.
 public protocol AnimatableStackView_ViewModel: Identifiable {
     var viewClass: AnimatableStackView_View.Type { get }
 }
 
 public extension AnimatableStackView {
-    // TODO: Documentation
+    /// View model that has ID and view class to which it belong.
     typealias ViewModel = AnimatableStackView_ViewModel
 }

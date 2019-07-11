@@ -8,7 +8,7 @@
 
 import Foundation
 
-// TODO: Documentation
+/// Objects conforming to that protocol are able to be created and then configured with view model.
 public protocol CreatableWithViewModel: ConfigurableWithViewModel {
     static func create(viewModel: Any) -> Self
 }

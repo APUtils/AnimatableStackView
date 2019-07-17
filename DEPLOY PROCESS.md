@@ -1,4 +1,5 @@
-- Assure `Carthage Project/AnimatableStackView.xcodeproj` and `Pods Project/AnimatableStackView.xcworkspace` have all dependencies added.
+- Run `Example` project and check that animation is correct
+- Run tests and assure they are passing
 - Change version in podspec
 - Run `podUpdate.command`
 - Update CHANGELOG.md

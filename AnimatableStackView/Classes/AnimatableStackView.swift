@@ -115,6 +115,9 @@ open class AnimatableStackView: UIStackView {
         }
         
         views = allNewViews
+        
+        // Force constraints layout to support height update inside cells
+        layoutIfNeeded()
     }
     
     // ******************************* MARK: - Public Methods

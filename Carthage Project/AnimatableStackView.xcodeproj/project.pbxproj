@@ -24,9 +24,18 @@
 		E2A739532260CFC700E97D55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A739512260CFC700E97D55 /* Main.storyboard */; };
 		E2A739552260CFC800E97D55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2A739542260CFC800E97D55 /* Assets.xcassets */; };
 		E2A739582260CFC800E97D55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A739562260CFC800E97D55 /* LaunchScreen.storyboard */; };
-		E2A739632260CFC800E97D55 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A739622260CFC800E97D55 /* Tests.swift */; };
+		E2A739632260CFC800E97D55 /* AnimatableStackView_Spec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A739622260CFC800E97D55 /* AnimatableStackView_Spec.swift */; };
 		E2A7396E2260D99900E97D55 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A7396C2260D99900E97D55 /* Quick.framework */; };
 		E2A7396F2260D99900E97D55 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2A7396D2260D99900E97D55 /* Nimble.framework */; };
+		E2C3135322DF640A00D6797A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C3135222DF640A00D6797A /* TestView.swift */; };
+		E2C3135522DF64A100D6797A /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C3135422DF64A100D6797A /* TestViewModel.swift */; };
+		E2C3135722DF663100D6797A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C3135622DF663100D6797A /* Utils.swift */; };
+		E2C3135B22DF747E00D6797A /* Nimble_Snapshots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C3135A22DF747E00D6797A /* Nimble_Snapshots.framework */; };
+		E2C3135D22DF748700D6797A /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C3135C22DF748700D6797A /* FBSnapshotTestCase.framework */; };
+		E2C3135F22DF755D00D6797A /* FBSnapshotTestCase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2C3135C22DF748700D6797A /* FBSnapshotTestCase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E2C3136022DF755D00D6797A /* Nimble_Snapshots.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2C3135A22DF747E00D6797A /* Nimble_Snapshots.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E2C3136122DF755D00D6797A /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2A7396D2260D99900E97D55 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E2C3136222DF755D00D6797A /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2A7396C2260D99900E97D55 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +67,19 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E2C3135E22DF754400D6797A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2C3135F22DF755D00D6797A /* FBSnapshotTestCase.framework in CopyFiles */,
+				E2C3136022DF755D00D6797A /* Nimble_Snapshots.framework in CopyFiles */,
+				E2C3136122DF755D00D6797A /* Nimble.framework in CopyFiles */,
+				E2C3136222DF755D00D6797A /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +101,7 @@
 		E202681322117D03004CC28A /* AnimatableStackView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnimatableStackView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E202681622117D03004CC28A /* AnimatableStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatableStackView.h; sourceTree = "<group>"; };
 		E202681722117D03004CC28A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E23F717622DF82D1000D1B32 /* podUpdate.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = podUpdate.command; path = "../Pods Project/Scripts/Cocoapods/podUpdate.command"; sourceTree = "<group>"; };
 		E28D75B522D49B61008FC13A /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		E28D75B722D49B97008FC13A /* ConfigurableWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableWithViewModel.swift; sourceTree = "<group>"; };
 		E28D75B922D49BAC008FC13A /* CreatableWithViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatableWithViewModel.swift; sourceTree = "<group>"; };
@@ -94,11 +117,17 @@
 		E2A739572260CFC800E97D55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2A739592260CFC800E97D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A7395E2260CFC800E97D55 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2A739622260CFC800E97D55 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		E2A739622260CFC800E97D55 /* AnimatableStackView_Spec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableStackView_Spec.swift; sourceTree = "<group>"; };
 		E2A739642260CFC800E97D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2A7396C2260D99900E97D55 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		E2A7396D2260D99900E97D55 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
-		E2CD103122D7928D00CDB64C /* podInstall.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = podInstall.command; path = "../Pods Project/Scripts/Cocoapods/podInstall.command"; sourceTree = "<group>"; };
+		E2C3135222DF640A00D6797A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		E2C3135422DF64A100D6797A /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		E2C3135622DF663100D6797A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E2C3135A22DF747E00D6797A /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble_Snapshots.framework; path = Carthage/Build/iOS/Nimble_Snapshots.framework; sourceTree = "<group>"; };
+		E2C3135C22DF748700D6797A /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
+		E2C3136A22DF780D00D6797A /* __ReferenceImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __ReferenceImages; sourceTree = "<group>"; };
+		E2C3136B22DF780E00D6797A /* __FailureDiffs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __FailureDiffs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +154,8 @@
 				E275E06F229FF84E00E9900C /* AnimatableStackView.framework in Frameworks */,
 				E2A7396E2260D99900E97D55 /* Quick.framework in Frameworks */,
 				E2A7396F2260D99900E97D55 /* Nimble.framework in Frameworks */,
+				E2C3135D22DF748700D6797A /* FBSnapshotTestCase.framework in Frameworks */,
+				E2C3135B22DF747E00D6797A /* Nimble_Snapshots.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +243,13 @@
 		E2A739612260CFC800E97D55 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E2A739622260CFC800E97D55 /* Tests.swift */,
+				E2C3136B22DF780E00D6797A /* __FailureDiffs */,
+				E2C3136A22DF780D00D6797A /* __ReferenceImages */,
+				E2A739622260CFC800E97D55 /* AnimatableStackView_Spec.swift */,
 				E2A739642260CFC800E97D55 /* Info.plist */,
+				E2C3135222DF640A00D6797A /* TestView.swift */,
+				E2C3135422DF64A100D6797A /* TestViewModel.swift */,
+				E2C3135622DF663100D6797A /* Utils.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -232,7 +268,7 @@
 				52C1F6B509E3F0AA0E0B9A82 /* checkBuild.command */,
 				53E0A218D7BD7E552B66F1A1 /* podCheck.command */,
 				AA18C772BA5A02B7FC61455E /* podPush.command */,
-				E2CD103122D7928D00CDB64C /* podInstall.command */,
+				E23F717622DF82D1000D1B32 /* podUpdate.command */,
 			);
 			name = _;
 			sourceTree = "<group>";
@@ -242,6 +278,8 @@
 			children = (
 				1834AC72A69DC91E1F3B8EDA /* _Carthage */,
 				C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */,
+				E2C3135C22DF748700D6797A /* FBSnapshotTestCase.framework */,
+				E2C3135A22DF747E00D6797A /* Nimble_Snapshots.framework */,
 				E2A7396D2260D99900E97D55 /* Nimble.framework */,
 				E2A7396C2260D99900E97D55 /* Quick.framework */,
 			);
@@ -309,6 +347,7 @@
 				E2A7395A2260CFC800E97D55 /* Sources */,
 				E2A7395B2260CFC800E97D55 /* Frameworks */,
 				E2A7395C2260CFC800E97D55 /* Resources */,
+				E2C3135E22DF754400D6797A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -477,7 +516,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2A739632260CFC800E97D55 /* Tests.swift in Sources */,
+				E2C3135522DF64A100D6797A /* TestViewModel.swift in Sources */,
+				E2C3135322DF640A00D6797A /* TestView.swift in Sources */,
+				E2A739632260CFC800E97D55 /* AnimatableStackView_Spec.swift in Sources */,
+				E2C3135722DF663100D6797A /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

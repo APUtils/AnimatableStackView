@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// View that can be created with view model and has an ID.
-public protocol AnimatableStackView_View: CreatableWithViewModel, Identifiable where Self: UIView {}
+public protocol AnimatableStackView_View: UIView, CreatableWithViewModel, Identifiable {}
 
 public extension AnimatableStackView {
     /// View that can be created with view model and has an ID.

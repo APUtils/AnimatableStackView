@@ -41,9 +41,9 @@ final class TestView: UIView {
     }
 }
 
-// ******************************* MARK: - AnimatableStackView_View
+// ******************************* MARK: - AnimatableStackView_Subview
 
-extension TestView: AnimatableStackView_View {
+extension TestView: AnimatableStackView_Subview {
     static func create(viewModel: Any) -> Self {
         let view = self.init(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         view.configure(viewModel: viewModel)

@@ -10,7 +10,7 @@ import Foundation
 
 /// View model that has ID and view class to which it belong.
 public protocol AnimatableStackView_ViewModel: Identifiable {
-    var viewClass: AnimatableStackView_View.Type { get }
+    var viewClass: AnimatableStackView_Subview.Type { get }
 }
 
 public extension AnimatableStackView {

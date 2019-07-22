@@ -10,7 +10,7 @@ import Foundation
 import AnimatableStackView
 
 
-extension UILabel: AnimatableStackView_View {
+extension UILabel: AnimatableStackView_Subview {
     public func configure(viewModel: Any) {
         text = viewModel as? String
     }
@@ -34,7 +34,7 @@ extension UILabel: AnimatableStackView_View {
 }
 
 extension String: AnimatableStackView_ViewModel {
-    public var viewClass: AnimatableStackView_View.Type {
+    public var viewClass: AnimatableStackView_Subview.Type {
         return UILabel.self
     }
     

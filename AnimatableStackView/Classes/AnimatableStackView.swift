@@ -17,7 +17,7 @@ open class AnimatableStackView: UIStackView {
     // ******************************* MARK: - Private Properties
     
     /// Array of `Views` that stack view currently displaying.
-    public private(set) var views: [View] = []
+    public private(set) var views: [Subview] = []
     
     // ******************************* MARK: - Configuration
     
@@ -32,12 +32,12 @@ open class AnimatableStackView: UIStackView {
         // - New views
         // - Deleted views
         // - Updated views
-        var allNewViews: [View] = []
-        var viewsToInsert: [View] = []
-        var viewsToDelete: [View] = []
-        var viewsToUpdate: [View] = []
+        var allNewViews: [Subview] = []
+        var viewsToInsert: [Subview] = []
+        var viewsToDelete: [Subview] = []
+        var viewsToUpdate: [Subview] = []
         viewModels.forEach { viewModel in
-            let view: View
+            let view: Subview
             if let existingView = views.first(where: { $0.id == viewModel.id }) {
                 // Update
                 view = existingView
@@ -123,7 +123,7 @@ open class AnimatableStackView: UIStackView {
     // ******************************* MARK: - Public Methods
     
     /// Find view that corresponds to passed identity. E.g. you can pass view model and get view for that.
-    open func getView(identity: Identifiable) -> View? {
+    open func getView(identity: Identifiable) -> Subview? {
         return views.first { $0.id == identity.id }
     }
     

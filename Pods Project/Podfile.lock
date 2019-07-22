@@ -1,20 +1,20 @@
 PODS:
-  - AnimatableStackView (3.0.0)
+  - AnimatableStackView (4.0.0)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - iOSSnapshotTestCase (2.2.0):
-    - iOSSnapshotTestCase/SwiftSupport (= 2.2.0)
-  - iOSSnapshotTestCase/Core (2.2.0)
-  - iOSSnapshotTestCase/SwiftSupport (2.2.0):
+  - iOSSnapshotTestCase (5.0.2):
+    - iOSSnapshotTestCase/SwiftSupport (= 5.0.2)
+  - iOSSnapshotTestCase/Core (5.0.2)
+  - iOSSnapshotTestCase/SwiftSupport (5.0.2):
     - iOSSnapshotTestCase/Core
   - Nimble (7.3.4)
-  - Nimble-Snapshots (6.4.1):
-    - Nimble-Snapshots/Core (= 6.4.1)
-  - Nimble-Snapshots/Core (6.4.1):
-    - iOSSnapshotTestCase (~> 2.0)
+  - Nimble-Snapshots (6.9.1):
+    - Nimble-Snapshots/Core (= 6.9.1)
+  - Nimble-Snapshots/Core (6.9.1):
+    - iOSSnapshotTestCase (~> 5.0)
     - Nimble (~> 7.0)
   - Quick (2.1.0)
 
@@ -38,13 +38,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: 4164d386a129347663a646ff20b62778d7e0fb3c
+  AnimatableStackView: c18de3517a47916d4d20b4172180ee4831d14027
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  iOSSnapshotTestCase: 415bd84f9dbba4ff45fede49d800bc7332fbedac
+  iOSSnapshotTestCase: 2d51aa06775e95cecb0a1fb9c5c159ccd1dd4596
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
-  Nimble-Snapshots: 438fb1a6fa3c655e246fc9ac375f6cd2964d759a
+  Nimble-Snapshots: bbd1ab264bacc24a9ce24a8363bc05aac783aeb0
   Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
 
-PODFILE CHECKSUM: 1e0affaa03c385e9b2efb8fdbc4adc1244691d26
+PODFILE CHECKSUM: bbda5859c6d9aca35f5e8bb2b3d5d11c4b19921c
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.7.5

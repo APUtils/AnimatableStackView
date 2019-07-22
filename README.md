@@ -25,7 +25,7 @@ Please check [official guide](https://github.com/Carthage/Carthage#if-youre-buil
 Cartfile:
 
 ```
-github "APUtils/AnimatableStackView" ~> 3.0
+github "APUtils/AnimatableStackView" ~> 4.0
 ```
 
 #### CocoaPods
@@ -34,7 +34,7 @@ AnimatableStackView is available through [CocoaPods](http://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AnimatableStackView', '~> 3.0'
+pod 'AnimatableStackView', '~> 4.0'
 ```
 
 ## Usage

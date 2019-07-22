@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 `AnimatableStackView` adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.1](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.1)
+Released on 07/22/2019.
+
+#### Fixed
+- Fixed zero height stack view layout case
+
+
 ## [4.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.0)
 Released on 07/22/2019.
 

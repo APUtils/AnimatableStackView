@@ -8,15 +8,6 @@ use_frameworks!
 
 target 'AnimatableStackView_Example' do
     pod 'AnimatableStackView', :path => '../'
-
-    target 'AnimatableStackView_Tests' do
-        inherit! :search_paths
-
-        pod 'Quick'
-        pod 'Nimble'
-        pod 'FBSnapshotTestCase'
-        pod 'Nimble-Snapshots'
-    end
 end
 
 

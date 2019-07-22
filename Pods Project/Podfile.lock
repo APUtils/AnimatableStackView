@@ -1,50 +1,16 @@
 PODS:
-  - AnimatableStackView (4.0.0)
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
-  - iOSSnapshotTestCase (5.0.2):
-    - iOSSnapshotTestCase/SwiftSupport (= 5.0.2)
-  - iOSSnapshotTestCase/Core (5.0.2)
-  - iOSSnapshotTestCase/SwiftSupport (5.0.2):
-    - iOSSnapshotTestCase/Core
-  - Nimble (7.3.4)
-  - Nimble-Snapshots (6.9.1):
-    - Nimble-Snapshots/Core (= 6.9.1)
-  - Nimble-Snapshots/Core (6.9.1):
-    - iOSSnapshotTestCase (~> 5.0)
-    - Nimble (~> 7.0)
-  - Quick (2.1.0)
+  - AnimatableStackView (4.0.1)
 
 DEPENDENCIES:
   - AnimatableStackView (from `../`)
-  - FBSnapshotTestCase
-  - Nimble
-  - Nimble-Snapshots
-  - Quick
-
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - FBSnapshotTestCase
-    - iOSSnapshotTestCase
-    - Nimble
-    - Nimble-Snapshots
-    - Quick
 
 EXTERNAL SOURCES:
   AnimatableStackView:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: c18de3517a47916d4d20b4172180ee4831d14027
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  iOSSnapshotTestCase: 2d51aa06775e95cecb0a1fb9c5c159ccd1dd4596
-  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
-  Nimble-Snapshots: bbd1ab264bacc24a9ce24a8363bc05aac783aeb0
-  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  AnimatableStackView: 8de62f7b0bb99b5a5838bc0093299972e6647eb4
 
-PODFILE CHECKSUM: bbda5859c6d9aca35f5e8bb2b3d5d11c4b19921c
+PODFILE CHECKSUM: 123792c948494fe83cc02b1d4cd49e2d2579d908
 
 COCOAPODS: 1.7.5

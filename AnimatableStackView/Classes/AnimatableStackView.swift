@@ -71,17 +71,11 @@ open class AnimatableStackView: UIStackView {
                 originY = 0
             }
             
+            // Preparing view and its subviews for animation.
+            // View and its subviews should be able to handle zero height properly.
             UIView.performWithoutAnimation {
                 view.frame = CGRect(x: 0, y: originY, width: bounds.size.width, height: 0)
-                
-                // Layout subviews for a new view frame.
-                // Preserve view's size using autoresizing mask during layout.
-                // View and its subviews should be able to handle zero height properly.
-                let originalParam = view.translatesAutoresizingMaskIntoConstraints
-                view.translatesAutoresizingMaskIntoConstraints = true
-                view.layoutIfNeeded()
-                view.translatesAutoresizingMaskIntoConstraints = originalParam
-                
+                view.layoutSubviewsOnly()
                 addSubview(view)
             }
         }
@@ -112,6 +106,12 @@ open class AnimatableStackView: UIStackView {
         viewsToUpdate.forEach { view in
             guard let viewModel = viewModels.first(where: { $0.id == view.id }) else { return }
             view.configure(viewModel: viewModel)
+            
+            // Fixing view's width. It might be wrong in a case stack view height is zero.
+            UIView.performWithoutAnimation {
+                view.frame.size.width = bounds.size.width
+                view.layoutSubviewsOnly()
+            }
         }
         
         views = allNewViews

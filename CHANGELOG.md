@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 ## [4.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.0)
 Released on 07/22/2019.
 
+#### Added
+- Added view based testing
+- Added layout spec
+- Added constraints update call at the end of configuration to support reconfiguration in cells
+
 #### Changed
 - Renamed View into Subview
 

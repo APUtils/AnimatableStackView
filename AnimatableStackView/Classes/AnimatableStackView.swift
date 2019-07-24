@@ -90,7 +90,15 @@ open class AnimatableStackView: UIStackView {
             allNewViewsWithDeletedViews.insert(view, at: previousIndex)
         }
         
-        allNewViewsWithDeletedViews.forEach { self.addArrangedSubview($0) }
+        allNewViewsWithDeletedViews.forEach { view in
+            // Fixing view's width. It might be wrong in a case stack view height is zero.
+            UIView.performWithoutAnimation {
+                view.frame.size.width = bounds.size.width
+                view.layoutSubviewsOnly()
+            }
+            
+            self.addArrangedSubview(view)
+        }
         
         //// 4. Hide deleted views and remove them from arranged subviews after animation is done.
         // Note: Async is unsafe and can be improved later with additional checks if needed.
@@ -106,12 +114,6 @@ open class AnimatableStackView: UIStackView {
         viewsToUpdate.forEach { view in
             guard let viewModel = viewModels.first(where: { $0.id == view.id }) else { return }
             view.configure(viewModel: viewModel)
-            
-            // Fixing view's width. It might be wrong in a case stack view height is zero.
-            UIView.performWithoutAnimation {
-                view.frame.size.width = bounds.size.width
-                view.layoutSubviewsOnly()
-            }
         }
         
         views = allNewViews
@@ -147,5 +149,8 @@ open class AnimatableStackView: UIStackView {
     /// Properly removes all arranged subviews from stack view.
     private func clear() {
         arrangedSubviews.forEach(removeSubview)
+        
+        // Update constraints so we won't have issues if we add the same views later.
+        layoutIfNeeded()
     }
 }

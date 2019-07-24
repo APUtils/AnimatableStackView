@@ -14,7 +14,7 @@ echo -e "\nBuilding Carthage project..."
 xcodebuild -project "Carthage Project/AnimatableStackView.xcodeproj" -sdk iphonesimulator -target "Example" | xcpretty
 
 echo -e "\nPerforming tests..."
-xcodebuild -project "Carthage Project/AnimatableStackView.xcodeproj" -sdk iphonesimulator -scheme "Example" -destination "platform=iOS Simulator,name=iPhone SE,OS=12.2" test | xcpretty
+xcodebuild -project "Carthage Project/AnimatableStackView.xcodeproj" -sdk iphonesimulator -scheme "Example" -destination "platform=iOS Simulator,name=iPhone SE,OS=12.4" test | xcpretty
 
 echo ""
 echo "SUCCESS!"

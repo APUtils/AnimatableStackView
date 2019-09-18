@@ -1,5 +1,4 @@
 - Run `Example` project and check that animation is correct
-- Run tests and assure they are passing
 - Change version in podspec
 - Run `podUpdate.command`
 - Update CHANGELOG.md

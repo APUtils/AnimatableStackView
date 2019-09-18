@@ -14,10 +14,40 @@ import UIKit
 /// and then call `view.layoutIfNeeded()` inside animation block.
 open class AnimatableStackView: UIStackView {
     
-    // ******************************* MARK: - Private Properties
+    // ******************************* MARK: - Public Properties
     
     /// Array of `Views` that stack view currently displaying.
     public private(set) var views: [Subview] = []
+    
+    // ******************************* MARK: - Private Properties
+    
+    /// UIStackView must have at least one view to layout views horizontally correctly ¯\_(ツ)_/¯
+    private lazy var zeroHeightView: UIView = {
+        let zeroHeightView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: 0))
+        zeroHeightView.backgroundColor = .clear
+        zeroHeightView.autoresizingMask = [.flexibleWidth]
+        return zeroHeightView
+    }()
+    
+    // ******************************* MARK: - Initialization and Setup
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    public required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+    }
+    
+    private func setup() {
+        addArrangedSubview(zeroHeightView)
+    }
     
     // ******************************* MARK: - Configuration
     
@@ -148,7 +178,9 @@ open class AnimatableStackView: UIStackView {
     
     /// Properly removes all arranged subviews from stack view.
     private func clear() {
-        arrangedSubviews.forEach(removeSubview)
+        arrangedSubviews
+            .filter { $0 != zeroHeightView }
+            .forEach(removeSubview)
         
         // Update constraints so we won't have issues if we add the same views later.
         layoutIfNeeded()

@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 `AnimatableStackView` adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.4](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.4)
+Released on 09/18/2019.
+
+#### Added
+- Added description about vertical animations only.
+
+
 ## [4.0.3](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.3)
 Released on 09/18/2019.
 

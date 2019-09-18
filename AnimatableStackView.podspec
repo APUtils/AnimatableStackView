@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AnimatableStackView'
-  s.version          = '4.0.3'
-  s.summary          = 'UIStackView based class that allows to animate its changes.'
+  s.version          = '4.0.4'
+  s.summary          = 'UIStackView based class that allows to animate its changes. Curently supports vertical animations only.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-UIStackView based class that provides a convenience interface to animate its content.
+UIStackView based class that provides a convenience interface to animate its content. Curently supports vertical animations only.
                        DESC
 
   s.homepage         = 'https://github.com/APUtils/AnimatableStackView'

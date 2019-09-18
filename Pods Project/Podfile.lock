@@ -1,5 +1,5 @@
 PODS:
-  - AnimatableStackView (4.0.3)
+  - AnimatableStackView (4.0.4)
 
 DEPENDENCIES:
   - AnimatableStackView (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: 9d16b8d9eadab7f270fb34bf2a32396ca2f7ff46
+  AnimatableStackView: e4b269e150f4aa3f4cf2e82aade7d6096e96a34d
 
 PODFILE CHECKSUM: 123792c948494fe83cc02b1d4cd49e2d2579d908
 

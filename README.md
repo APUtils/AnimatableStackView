@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/AnimatableStackView.svg?style=flat)](http://cocoapods.org/pods/AnimatableStackView)
 [![CI Status](http://img.shields.io/travis/APUtils/AnimatableStackView.svg?style=flat)](https://travis-ci.org/APUtils/AnimatableStackView)
 
-UIStackView based class that allows to animate its changes
+UIStackView based class that allows to animate its changes. Curently supports vertical animations only.
 
 ## Example
 

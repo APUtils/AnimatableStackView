@@ -103,10 +103,12 @@ open class AnimatableStackView: UIStackView {
             
             // Preparing view and its subviews for animation.
             // View and its subviews should be able to handle zero height properly.
-            UIView.performWithoutAnimation {
-                view.frame = CGRect(x: 0, y: originY, width: bounds.size.width, height: 0)
-                view.layoutSubviewsOnly()
-                addSubview(view)
+            if UIView.inheritedAnimationDuration > 0 {
+                UIView.performWithoutAnimation {
+                    view.frame = CGRect(x: 0, y: originY, width: bounds.size.width, height: 0)
+                    view.layoutSubviewsOnly()
+                    addSubview(view)
+                }
             }
         }
         
@@ -122,9 +124,11 @@ open class AnimatableStackView: UIStackView {
         
         allNewViewsWithDeletedViews.forEach { view in
             // Fixing view's width. It might be wrong in a case stack view height is zero.
-            UIView.performWithoutAnimation {
-                view.frame.size.width = bounds.size.width
-                view.layoutSubviewsOnly()
+            if UIView.inheritedAnimationDuration > 0 {
+                UIView.performWithoutAnimation {
+                    view.frame.size.width = bounds.size.width
+                    view.layoutSubviewsOnly()
+                }
             }
             
             self.addArrangedSubview(view)

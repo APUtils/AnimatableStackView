@@ -20,7 +20,8 @@ final class ViewController: UIViewController {
     
     private let vms1: [String] = ["1", "2", "3"]
     private let vms2: [String] = ["3", "2", "1", "4", "5"]
-    private let vms3: [String] = []
+    private let vms3: [String] = ["3", "0", "-1", "2", "1", "4", "5"]
+    private let vms4: [String] = []
     
     // ******************************* MARK: - Initialization and Setup
     
@@ -48,6 +49,13 @@ final class ViewController: UIViewController {
                 UIView.animate(withDuration: 2) {
                     self.stackView.configure(viewModels: self.vms3)
                     self.view.layoutIfNeeded()
+                }
+                
+                g.asyncMain(2) {
+                    UIView.animate(withDuration: 2) {
+                        self.stackView.configure(viewModels: self.vms4)
+                        self.view.layoutIfNeeded()
+                    }
                 }
             }
         }

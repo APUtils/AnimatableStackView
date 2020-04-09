@@ -67,7 +67,7 @@ open class AnimatableStackView: UIStackView {
         var viewsToDelete: [Subview] = []
         var viewsToUpdate: [Subview] = []
         viewModels.forEach { viewModel in
-            let view: Subview
+            var view: Subview!
             if let existingView = views.first(where: { $0.id == viewModel.id }) {
                 // Update
                 view = existingView
@@ -75,7 +75,12 @@ open class AnimatableStackView: UIStackView {
             } else {
                 // New
                 let viewClass = viewModel.viewClass
-                view = viewClass.create(viewModel: viewModel)
+                
+                // Prevent animations during creation
+                UIView.performWithoutAnimation {
+                    view = viewClass.create(viewModel: viewModel)
+                }
+                
                 viewsToInsert.append(view)
             }
             
@@ -95,8 +100,12 @@ open class AnimatableStackView: UIStackView {
             if views.isEmpty {
                 originY = 0
             } else if let index = allNewViews.firstIndex(where: { $0.id == view.id }) {
-                let clampedIndex = min(views.endIndex - 1, index)
-                originY = views[clampedIndex].frame.maxY
+                if index == 0 {
+                    originY = 0
+                } else {
+                    // We take previous view and attaching to its end
+                    originY = allNewViews[index - 1].frame.maxY
+                }
             } else {
                 originY = 0
             }

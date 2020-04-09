@@ -84,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D9238C1243F83EB00ACFB44 /* carthageUpdate.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
 		2348B7AD6FC366A029681D4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		27A65933230C2FF4F758F562 /* carthageUpdate.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
 		281AEF37AD4816ADC749CC56 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; };
@@ -280,6 +281,7 @@
 				53E0A218D7BD7E552B66F1A1 /* podCheck.command */,
 				AA18C772BA5A02B7FC61455E /* podPush.command */,
 				E23F717622DF82D1000D1B32 /* podUpdate.command */,
+				0D9238C1243F83EB00ACFB44 /* carthageUpdate.command */,
 			);
 			name = _;
 			sourceTree = "<group>";

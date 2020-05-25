@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,21 +31,33 @@
                                     <constraint firstAttribute="trailing" secondItem="0b7-5B-ucJ" secondAttribute="trailing" id="yFE-FB-X1a"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-4F-bmn">
-                                <rect key="frame" x="178.5" y="433" width="57" height="30"/>
-                                <state key="normal" title="Animate"/>
-                                <connections>
-                                    <action selector="onAnimateTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tMy-Y4-hkD"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vjL-zv-DeF">
+                                <rect key="frame" x="172.5" y="418" width="69" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xbc-4F-bmn">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="30"/>
+                                        <state key="normal" title="Animate"/>
+                                        <connections>
+                                            <action selector="onAnimateTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tMy-Y4-hkD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhS-or-WXF">
+                                        <rect key="frame" x="0.0" y="30" width="69" height="30"/>
+                                        <state key="normal" title="Animate 2"/>
+                                        <connections>
+                                            <action selector="onAnimate2Tap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZDU-ro-zzO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Xbc-4F-bmn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0qn-yB-fob"/>
                             <constraint firstItem="D72-1h-bcW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KXr-NM-SXI"/>
                             <constraint firstItem="D72-1h-bcW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="N3p-79-i1l"/>
-                            <constraint firstItem="Xbc-4F-bmn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WrO-zn-CGt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D72-1h-bcW" secondAttribute="trailing" id="aCI-UN-mAB"/>
+                            <constraint firstItem="vjL-zv-DeF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHl-ME-b9y"/>
+                            <constraint firstItem="vjL-zv-DeF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fCf-TS-5dA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -57,6 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="132" y="138"/>
         </scene>
     </scenes>
 </document>

@@ -23,12 +23,14 @@ final class ViewController: UIViewController {
     private let vms3: [String] = ["3", "0", "-1", "2", "1", "4", "5"]
     private let vms4: [String] = []
     
+    private var hideVMs: [HideableViewModel] = [HideableViewModel(),HideableViewModel(),HideableViewModel(),HideableViewModel()]
+    
     // ******************************* MARK: - Initialization and Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.stackView.configure(viewModels: self.hideVMs)
     }
     
     // ******************************* MARK: - Actions
@@ -58,6 +60,15 @@ final class ViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    @IBAction private func onAnimate2Tap(_ sender: Any) {
+        UIView.animate(withDuration: 2) {
+            self.hideVMs.modifyForEach { $1.isHidden.toggle() }
+            self.stackView.configure(viewModels: self.hideVMs)
+            self.view.layoutIfNeeded()
+            print(self.stackView)
         }
     }
 }

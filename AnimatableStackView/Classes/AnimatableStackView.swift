@@ -161,6 +161,13 @@ open class AnimatableStackView: UIStackView {
         
         views = allNewViews
         
+        // During update some views isHidden property might get changed but stack view somehow delays
+        // this update till the end of the animation closure. The bad thing is we might need to know
+        // exact stack view and its elements positions during animation computation.
+        // So to force layout we are removing and then adding back all views.
+        clear()
+        allNewViewsWithDeletedViews.forEach { addArrangedSubview($0) }
+        
         // Force constraints layout to support height update inside cells
         layoutIfNeeded()
     }

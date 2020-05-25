@@ -42,11 +42,3 @@ extension String: AnimatableStackView_ViewModel {
         return self
     }
 }
-
-
-private extension UIColor {
-    static var random: UIColor {
-        let colors: [UIColor] = [.blue, .red, .green, .gray, .darkGray, .cyan, .yellow, .magenta, .orange, .purple, .brown]
-        return colors.randomElement()!
-    }
-}

@@ -52,13 +52,14 @@ open class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Configuration
     
-    /// Core method to configure stack view's arranged subviews.
+    /// Core method to update stack view's arranged subviews.
     /// Should be called inside animation block and `layoutIfNeeded()`
     /// should be called on base view, e.g. view controller's view
     /// for animations to work.
     /// - parameter viewModels: View models that will be used to configure a new state.
+    /// - parameter postLayout: Post layout is required to update inner constraints so resizeable table view cells can update their heights but in some cases you may want to delay `layoutIfNeeded()` call. For example, if you have constraints outside of stack view and you want to animate everything together.
     /// Views will be reused or created whenever needed and properly attacked so animation will be smooth.
-    open func configure(viewModels: [ViewModel]) {
+    open func update(viewModels: [ViewModel], postLayout: Bool = true) {
         
         let initialOriginY = frame.origin.y
         
@@ -173,7 +174,9 @@ open class AnimatableStackView: UIStackView {
         allNewViewsWithDeletedViews.forEach { addArrangedSubview($0) }
         
         // Force constraints layout to support height update inside cells
-        layoutIfNeeded()
+        if postLayout {
+            layoutIfNeeded()
+        }
         
         // Restore vertical position
         frame.origin.y = initialOriginY

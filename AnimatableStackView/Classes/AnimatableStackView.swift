@@ -25,7 +25,8 @@ open class AnimatableStackView: UIStackView {
     private lazy var zeroHeightView: UIView = {
         let zeroHeightView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.size.width, height: 0))
         zeroHeightView.backgroundColor = .clear
-        zeroHeightView.autoresizingMask = [.flexibleWidth]
+        zeroHeightView.translatesAutoresizingMaskIntoConstraints = false
+        zeroHeightView.heightAnchor.constraint(equalToConstant: 0).isActive = true
         return zeroHeightView
     }()
     
@@ -58,6 +59,9 @@ open class AnimatableStackView: UIStackView {
     /// - parameter viewModels: View models that will be used to configure a new state.
     /// Views will be reused or created whenever needed and properly attacked so animation will be smooth.
     open func configure(viewModels: [ViewModel]) {
+        
+        let initialOriginY = frame.origin.y
+        
         //// 1. Iterate over all viewModels and find:
         // - New views
         // - Deleted views
@@ -170,6 +174,9 @@ open class AnimatableStackView: UIStackView {
         
         // Force constraints layout to support height update inside cells
         layoutIfNeeded()
+        
+        // Restore vertical position
+        frame.origin.y = initialOriginY
     }
     
     // ******************************* MARK: - Public Methods

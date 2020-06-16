@@ -68,7 +68,6 @@ final class ViewController: UIViewController {
             self.hideVMs.modifyForEach { $1.isHidden.toggle() }
             self.stackView.configure(viewModels: self.hideVMs)
             self.view.layoutIfNeeded()
-            print(self.stackView)
         }
     }
 }

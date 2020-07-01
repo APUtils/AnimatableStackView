@@ -17,6 +17,7 @@ extension UILabel: AnimatableStackView_Subview {
     
     public static func create(viewModel: Any) -> Self {
         let label = self.init()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.contentMode = .top
         label.backgroundColor = .random
         label.configure(viewModel: viewModel)

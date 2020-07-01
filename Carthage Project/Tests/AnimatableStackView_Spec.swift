@@ -20,22 +20,22 @@ class AnimatableStackView_Spec: QuickSpec {
                 let orangeVM = TestViewModel(backgroundColor: .orange)
                 
                 context("and configure with red-green-blue view models") {
-                    beforeEach { sv.configure(viewModels: [redVM, greenVM, blueVM]) }
+                    beforeEach { sv.update(viewModels: [redVM, greenVM, blueVM]) }
                     it("should have red-green-blue snaphot") { expect(sv).to(haveValidSnapshot()) }
                     
                     context("and reconfigured with green-blue-red view models") {
-                        beforeEach { sv.configure(viewModels: [greenVM, blueVM, redVM]) }
+                        beforeEach { sv.update(viewModels: [greenVM, blueVM, redVM]) }
                         it("should have green-blue-red snaphot") { expect(sv).to(haveValidSnapshot()) }
                     }
                     
                     context("and reconfigured with green-brown view models") {
-                        beforeEach { sv.configure(viewModels: [greenVM, brownVM]) }
+                        beforeEach { sv.update(viewModels: [greenVM, brownVM]) }
                         it("should have green-brown snaphot") { expect(sv).to(haveValidSnapshot()) }
                     }
                     
                     // Blue views have same ID so only last one will be added as view because of views reuse.
                     context("and reconfigured with blue-blue-blue-orange-blue view models") {
-                        beforeEach { sv.configure(viewModels: [blueVM, blueVM, blueVM, orangeVM, blueVM]) }
+                        beforeEach { sv.update(viewModels: [blueVM, blueVM, blueVM, orangeVM, blueVM]) }
                         it("should have orange-blue snaphot") { expect(sv).to(haveValidSnapshot()) }
                     }
                 }

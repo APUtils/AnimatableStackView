@@ -18,6 +18,7 @@ open class AnimatableStackView: UIStackView {
     
     /// Array of `Views` that stack view currently displaying.
     public private(set) var views: [Subview] = []
+    private static let pool = ViewsPool()
     
     // ******************************* MARK: - Private Properties
     
@@ -78,12 +79,9 @@ open class AnimatableStackView: UIStackView {
                 view = existingView
                 viewsToUpdate.append(view)
             } else {
-                // New
-                let viewClass = viewModel.viewClass
-                
                 // Prevent animations during creation
                 UIView.performWithoutAnimation {
-                    view = viewClass.create(viewModel: viewModel)
+                    view = AnimatableStackView.pool.get(viewModel: viewModel)
                 }
                 
                 viewsToInsert.append(view)
@@ -180,6 +178,9 @@ open class AnimatableStackView: UIStackView {
         
         // Restore vertical position
         frame.origin.y = initialOriginY
+        
+        // Add view to the pool
+        AnimatableStackView.pool.add(viewsToDelete)
     }
     
     // ******************************* MARK: - Public Methods

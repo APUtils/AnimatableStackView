@@ -10,6 +10,7 @@
 		0D949D7E247C3AF200C5FAFC /* HideableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D949D7D247C3AF200C5FAFC /* HideableViewModel.swift */; };
 		0D949D80247C3B0200C5FAFC /* HideableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D949D7F247C3B0200C5FAFC /* HideableView.swift */; };
 		0D98771D247C3BBA00AA1404 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98771C247C3BBA00AA1404 /* UIColor+Extension.swift */; };
+		0D9881DC24ACD76E00F61B77 /* ViewsPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9881DB24ACD76E00F61B77 /* ViewsPool.swift */; };
 		333952BEBCC60FD771D2A75A /* APExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */; };
 		E202681822117D03004CC28A /* AnimatableStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = E202681622117D03004CC28A /* AnimatableStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E275E06F229FF84E00E9900C /* AnimatableStackView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E202681322117D03004CC28A /* AnimatableStackView.framework */; };
@@ -91,6 +92,7 @@
 		0D949D7D247C3AF200C5FAFC /* HideableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableViewModel.swift; sourceTree = "<group>"; };
 		0D949D7F247C3B0200C5FAFC /* HideableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableView.swift; sourceTree = "<group>"; };
 		0D98771C247C3BBA00AA1404 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		0D9881DB24ACD76E00F61B77 /* ViewsPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsPool.swift; sourceTree = "<group>"; };
 		2348B7AD6FC366A029681D4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		27A65933230C2FF4F758F562 /* carthageUpdate.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
 		281AEF37AD4816ADC749CC56 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				E290FCCC22E62D06003F0F26 /* _Extensions */,
 				E28D75B422D49B45008FC13A /* _Protocols */,
 				E28D75BC22D49BC6008FC13A /* AnimatableStackView.swift */,
+				0D9881DB24ACD76E00F61B77 /* ViewsPool.swift */,
 			);
 			name = Sources;
 			path = ../../AnimatableStackView/Classes;
@@ -525,6 +528,7 @@
 			files = (
 				E28D75B622D49B61008FC13A /* Identifiable.swift in Sources */,
 				E28D75BA22D49BAC008FC13A /* CreatableWithViewModel.swift in Sources */,
+				0D9881DC24ACD76E00F61B77 /* ViewsPool.swift in Sources */,
 				E290FCCE22E62D27003F0F26 /* UIView+Utils.swift in Sources */,
 				E28D75BF22D49C52008FC13A /* AnimatableStackView_Subview.swift in Sources */,
 				E28D75B822D49B97008FC13A /* ConfigurableWithViewModel.swift in Sources */,

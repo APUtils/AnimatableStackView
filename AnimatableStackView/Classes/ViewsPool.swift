@@ -17,8 +17,8 @@ final class ViewsPool {
     }
     
     func get(viewModel: AnimatableStackView.ViewModel) -> AnimatableStackView.Subview {
-        if let existingView = views.first(where: { type(of: $0) == viewModel.viewClass }) {
-            views.removeAll { $0 === existingView }
+        if let existingViewIndex = views.firstIndex(where: { type(of: $0) == viewModel.viewClass }) {
+            let existingView = views.remove(at: existingViewIndex)
             UIView.performWithoutAnimation {
                 existingView.configure(viewModel: viewModel)
             }

@@ -40,6 +40,7 @@ final class ViewController: UIViewController {
         print("********1 %f", Date().timeIntervalSince(date1))
         
         let date2 = Date()
+        self.stackView.update(viewModels: [], postLayout: false)
         self.stackView.update(viewModels: vms500, postLayout: false)
         view.layoutIfNeeded()
         print("********2 %f", Date().timeIntervalSince(date2))

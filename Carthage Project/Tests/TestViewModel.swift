@@ -9,7 +9,12 @@
 @testable import AnimatableStackView
 
 struct TestViewModel {
+    let id = UUID().uuidString
     let backgroundColor: UIColor
+    
+    func clone() -> TestViewModel {
+        TestViewModel(backgroundColor: backgroundColor)
+    }
 }
 
 // ******************************* MARK: - AnimatableStackView_ViewModel
@@ -18,8 +23,18 @@ extension TestViewModel: AnimatableStackView_ViewModel {
     var animatableStackViewClass: AnimatableStackView_Subview.Type {
         return TestView.self
     }
+}
+
+// ******************************* MARK: - AnimatableView_ViewModel
+
+extension TestViewModel: AnimatableView_ViewModel {
     
-    var id: String {
-        return backgroundColor.description
+    var animatableViewClass: AnimatableView_Subview.Type { TestView.self }
+    
+    func copy() -> TestViewModel { self }
+    
+    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool {
+        guard let viewModel = viewModel as? TestViewModel else { return true }
+        return backgroundColor != viewModel.backgroundColor
     }
 }

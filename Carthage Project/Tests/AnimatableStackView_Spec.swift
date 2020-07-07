@@ -11,7 +11,6 @@ class AnimatableStackView_Spec: QuickSpec {
             context("When instantiated from code") {
                 let sv = AnimatableStackView(frame: .zero)
                 sv.axis = .vertical
-                Utils.showInWindow(innerHeightView: sv)
                 
                 let redVM = TestViewModel(backgroundColor: .red)
                 let greenVM = TestViewModel(backgroundColor: .green)
@@ -21,22 +20,22 @@ class AnimatableStackView_Spec: QuickSpec {
                 
                 context("and configure with red-green-blue view models") {
                     beforeEach { sv.update(viewModels: [redVM, greenVM, blueVM]) }
-                    it("should have red-green-blue snaphot") { expect(sv).to(haveValidSnapshot()) }
+                    Utils.shouldHaveProperLayout(resizeableScreenWidthView: sv)
                     
                     context("and reconfigured with green-blue-red view models") {
                         beforeEach { sv.update(viewModels: [greenVM, blueVM, redVM]) }
-                        it("should have green-blue-red snaphot") { expect(sv).to(haveValidSnapshot()) }
+                        Utils.shouldHaveProperLayout(resizeableScreenWidthView: sv)
                     }
                     
                     context("and reconfigured with green-brown view models") {
                         beforeEach { sv.update(viewModels: [greenVM, brownVM]) }
-                        it("should have green-brown snaphot") { expect(sv).to(haveValidSnapshot()) }
+                        Utils.shouldHaveProperLayout(resizeableScreenWidthView: sv)
                     }
                     
                     // Blue views have same ID so only last one will be added as view because of views reuse.
                     context("and reconfigured with blue-blue-blue-orange-blue view models") {
                         beforeEach { sv.update(viewModels: [blueVM, blueVM, blueVM, orangeVM, blueVM]) }
-                        it("should have orange-blue snaphot") { expect(sv).to(haveValidSnapshot()) }
+                        Utils.shouldHaveProperLayout(resizeableScreenWidthView: sv)
                     }
                 }
             }

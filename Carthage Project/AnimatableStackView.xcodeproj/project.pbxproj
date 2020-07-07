@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D64E1D924B345AB00627DAA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64E1D824B345AB00627DAA /* Utils.swift */; };
+		0D64E1DB24B499FE00627DAA /* AnimatableView_Spec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D64E1DA24B499FE00627DAA /* AnimatableView_Spec.swift */; };
 		0D949D7E247C3AF200C5FAFC /* HideableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D949D7D247C3AF200C5FAFC /* HideableViewModel.swift */; };
 		0D949D80247C3B0200C5FAFC /* HideableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D949D7F247C3B0200C5FAFC /* HideableView.swift */; };
 		0D98771D247C3BBA00AA1404 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98771C247C3BBA00AA1404 /* UIColor+Extension.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		0D64E1D824B345AB00627DAA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0D64E1DA24B499FE00627DAA /* AnimatableView_Spec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView_Spec.swift; sourceTree = "<group>"; };
 		0D9238C1243F83EB00ACFB44 /* carthageUpdate.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
 		0D949D7D247C3AF200C5FAFC /* HideableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableViewModel.swift; sourceTree = "<group>"; };
 		0D949D7F247C3B0200C5FAFC /* HideableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableView.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				E2C3135222DF640A00D6797A /* TestView.swift */,
 				E2C3135422DF64A100D6797A /* TestViewModel.swift */,
 				E2C3135622DF663100D6797A /* Utils.swift */,
+				0D64E1DA24B499FE00627DAA /* AnimatableView_Spec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 			files = (
 				E2C3135522DF64A100D6797A /* TestViewModel.swift in Sources */,
 				E2C3135322DF640A00D6797A /* TestView.swift in Sources */,
+				0D64E1DB24B499FE00627DAA /* AnimatableView_Spec.swift in Sources */,
 				E2A739632260CFC800E97D55 /* AnimatableStackView_Spec.swift in Sources */,
 				E2C3135722DF663100D6797A /* Utils.swift in Sources */,
 			);

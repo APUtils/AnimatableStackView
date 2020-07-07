@@ -31,38 +31,6 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        view.layoutIfNeeded()
-//        usleep(500000)
-//
-//        let vms1000 = stride(from: 0, to: 1000, by: 1).map { "\($0)" }
-//        let vms500 = stride(from: 0, to: 500, by: 1).map { "\($0)" }
-//
-//        let date1 = Date()
-//        self.stackView.update(viewModels: vms1000, postLayout: false)
-//        view.layoutIfNeeded()
-//        print("********1", Date().timeIntervalSince(date1))
-//        usleep(500000)
-//
-//        let date2 = Date()
-//        self.stackView.update(viewModels: [], postLayout: false)
-//        self.stackView.update(viewModels: vms500, postLayout: false)
-//        view.layoutIfNeeded()
-//        print("********2", Date().timeIntervalSince(date2))
-//        usleep(500000)
-//
-//        let date3 = Date()
-//        containerView.update(viewModels: vms1000)
-//        view.layoutIfNeeded()
-//        print("********3", Date().timeIntervalSince(date3))
-//        usleep(500000)
-//
-//        let date4 = Date()
-//        containerView.update(viewModels: [])
-//        containerView.update(viewModels: vms500)
-//        view.layoutIfNeeded()
-//        print("********4", Date().timeIntervalSince(date4))
-//        usleep(500000)
-        
         self.stackView.update(viewModels: [])
         self.containerView.update(viewModels: [])
     }

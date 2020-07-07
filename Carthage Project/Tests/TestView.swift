@@ -60,3 +60,9 @@ extension TestView: AnimatableStackView_Subview {
         backgroundColor = vm.backgroundColor
     }
 }
+
+// ******************************* MARK: - AnimatableView_Subview
+
+extension TestView: AnimatableView_Subview {
+    var viewModel: Any? { vm }
+}

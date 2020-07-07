@@ -58,6 +58,7 @@ open class AnimatableView: UIView {
     
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
+        clipsToBounds = true
     }
     
     // ******************************* MARK: - UIView Overrides

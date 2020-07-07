@@ -16,20 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D72-1h-bcW">
-                                <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0b7-5B-ucJ" customClass="AnimatableStackView" customModule="AnimatableStackView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="0b7-5B-ucJ" firstAttribute="top" secondItem="D72-1h-bcW" secondAttribute="top" id="BBy-AU-yMg"/>
-                                    <constraint firstItem="0b7-5B-ucJ" firstAttribute="leading" secondItem="D72-1h-bcW" secondAttribute="leading" id="G0Z-Uq-dn9"/>
-                                    <constraint firstAttribute="bottom" secondItem="0b7-5B-ucJ" secondAttribute="bottom" id="v0t-Uq-Rx7"/>
-                                    <constraint firstAttribute="trailing" secondItem="0b7-5B-ucJ" secondAttribute="trailing" id="yFE-FB-X1a"/>
-                                </constraints>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="207" placeholderIntrinsicHeight="0.0" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0b7-5B-ucJ" customClass="AnimatableStackView" customModule="AnimatableStackView">
+                                <rect key="frame" x="0.0" y="44" width="207" height="0.0"/>
+                            </stackView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="207" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="KXm-xh-BbJ" customClass="AnimatableView" customModule="AnimatableStackView">
+                                <rect key="frame" x="207" y="44" width="207" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vjL-zv-DeF">
                                 <rect key="frame" x="172.5" y="418" width="69" height="60"/>
@@ -50,21 +42,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="KXm-xh-BbJ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="128"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KXm-xh-BbJ" firstAttribute="top" secondItem="D72-1h-bcW" secondAttribute="bottom" id="7LT-jP-96F"/>
-                            <constraint firstItem="D72-1h-bcW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KXr-NM-SXI"/>
-                            <constraint firstItem="D72-1h-bcW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="N3p-79-i1l"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D72-1h-bcW" secondAttribute="trailing" id="aCI-UN-mAB"/>
+                            <constraint firstItem="0b7-5B-ucJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="010-FL-GqU"/>
+                            <constraint firstItem="KXm-xh-BbJ" firstAttribute="leading" secondItem="0b7-5B-ucJ" secondAttribute="trailing" id="U2R-td-k2J"/>
+                            <constraint firstItem="0b7-5B-ucJ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="ZcJ-E1-XwI"/>
                             <constraint firstItem="vjL-zv-DeF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cHl-ME-b9y"/>
                             <constraint firstItem="vjL-zv-DeF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fCf-TS-5dA"/>
-                            <constraint firstItem="KXm-xh-BbJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hbq-vY-6sn"/>
+                            <constraint firstItem="KXm-xh-BbJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hLP-pZ-3IR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KXm-xh-BbJ" secondAttribute="trailing" id="jtl-IH-h3c"/>
+                            <constraint firstItem="0b7-5B-ucJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nan-pD-9OU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

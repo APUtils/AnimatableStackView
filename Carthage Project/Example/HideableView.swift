@@ -9,7 +9,9 @@
 import AnimatableStackView
 import UIKit
 
-final class HideableView: UIView, AnimatableStackView_Subview {
+final class HideableView: UIView, AnimatableStackView_Subview, AnimatableView_Subview {
+    
+    var viewModel: Any?
     
     static func create(viewModel: Any) -> Self {
         let view = Self()
@@ -18,13 +20,11 @@ final class HideableView: UIView, AnimatableStackView_Subview {
         return view
     }
     
-    private var viewModel: HideableViewModel!
-    
-    var id: String { viewModel.id }
+    var id: String { (viewModel as? Identifiable)?.id ?? "" }
     
     func configure(viewModel: Any) {
         guard let viewModel = viewModel as? HideableViewModel else { return }
-        self.viewModel = viewModel
+        self.viewModel = viewModel.copy()
         
         backgroundColor = viewModel.color
         isHidden = viewModel.isHidden

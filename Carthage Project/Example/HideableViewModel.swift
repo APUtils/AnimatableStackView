@@ -9,10 +9,25 @@
 import AnimatableStackView
 import Foundation
 
-final class HideableViewModel: AnimatableStackView_ViewModel {
+final class HideableViewModel: AnimatableStackView_ViewModel, AnimatableView_ViewModel {
     
-    let viewClass: AnimatableStackView_Subview.Type = HideableView.self
-    let color: UIColor = UIColor.random
-    let id: String = UUID().uuidString
+    let animatableViewClass: AnimatableView_Subview.Type = HideableView.self
+    let animatableStackViewClass: AnimatableStackView_Subview.Type = HideableView.self
+    var color: UIColor = UIColor.random
+    var id: String = UUID().uuidString
     var isHidden: Bool = true
+    
+    func copy() -> Self {
+        let copy = Self()
+        copy.id = id
+        copy.isHidden = isHidden
+        
+        return copy
+    }
+    
+    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool {
+        guard let viewModel = viewModel as? HideableViewModel else { return true }
+        return color != viewModel.color
+            || isHidden != viewModel.isHidden
+    }
 }

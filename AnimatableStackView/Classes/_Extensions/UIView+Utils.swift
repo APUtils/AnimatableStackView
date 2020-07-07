@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIView {
+    
+    var isVisible: Bool { !isHidden && alpha >= 0.01 }
+    
     /// Preserve view's size using autoresizing mask during layout.
     func layoutSubviewsOnly() {
         let originalParam = translatesAutoresizingMaskIntoConstraints

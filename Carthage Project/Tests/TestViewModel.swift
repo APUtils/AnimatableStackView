@@ -15,7 +15,7 @@ struct TestViewModel {
 // ******************************* MARK: - AnimatableStackView_ViewModel
 
 extension TestViewModel: AnimatableStackView_ViewModel {
-    var viewClass: AnimatableStackView_Subview.Type {
+    var animatableStackViewClass: AnimatableStackView_Subview.Type {
         return TestView.self
     }
     

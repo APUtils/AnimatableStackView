@@ -9,16 +9,30 @@
 import Foundation
 import UIKit
 
+/// Subview that can be created with view model and has an ID.
+public protocol AnimatableStackView_Subview: UIView, CreatableWithViewModel, Identifiable {}
+
+/// View model that has ID and view class to which it belong.
+public protocol AnimatableStackView_ViewModel: Identifiable {
+    var animatableStackViewClass: AnimatableStackView_Subview.Type { get }
+}
+
 /// Ordinary stack view that supports animations.
-/// Just perform changes using `configure(viewModels:)`
+/// Just perform changes using `update(viewModels:postLayout:)`
 /// and then call `view.layoutIfNeeded()` inside animation block.
 open class AnimatableStackView: UIStackView {
     
+    /// View model that has ID and view class to which it belong.
+    public typealias ViewModel = AnimatableStackView_ViewModel
+    
+    /// Subview that can be created with view model and has an ID.
+    public typealias Subview = AnimatableStackView_Subview
+    
     // ******************************* MARK: - Public Properties
     
-    /// Array of `Views` that stack view currently displaying.
+    /// Array of `Views` that animatable view is currently displaying
     public private(set) var views: [Subview] = []
-    private static let pool = ViewsPool()
+    private let viewsPool = ViewsPool()
     
     // ******************************* MARK: - Private Properties
     
@@ -54,14 +68,15 @@ open class AnimatableStackView: UIStackView {
     // ******************************* MARK: - Configuration
     
     /// Core method to update stack view's arranged subviews.
-    /// Should be called inside animation block and `layoutIfNeeded()`
-    /// should be called on base view, e.g. view controller's view
-    /// for animations to work.
+    /// May be called inside animation block.
+    /// If called inside animation block `layoutIfNeeded()` should be called on base view,
+    /// e.g. view controller's view for animations to work.
     /// - parameter viewModels: View models that will be used to configure a new state.
     /// - parameter postLayout: Post layout is required to update inner constraints so resizeable table view cells can update their heights but in some cases you may want to delay `layoutIfNeeded()` call. For example, if you have constraints outside of stack view and you want to animate everything together.
-    /// Views will be reused or created whenever needed and properly attacked so animation will be smooth.
+    /// Views will be reused or created whenever needed and properly attached so animation will be smooth.
     open func update(viewModels: [ViewModel], postLayout: Bool = true) {
         
+        let animationDuration = UIView.inheritedAnimationDuration
         let initialOriginY = frame.origin.y
         
         //// 1. Iterate over all viewModels and find:
@@ -81,7 +96,7 @@ open class AnimatableStackView: UIStackView {
             } else {
                 // Prevent animations during creation
                 UIView.performWithoutAnimation {
-                    view = AnimatableStackView.pool.get(viewModel: viewModel)
+                    view = viewsPool.get(viewModel: viewModel, beforeReuse: { $0.isHidden = false })
                 }
                 
                 viewsToInsert.append(view)
@@ -115,7 +130,7 @@ open class AnimatableStackView: UIStackView {
             
             // Preparing view and its subviews for animation.
             // View and its subviews should be able to handle zero height properly.
-            if UIView.inheritedAnimationDuration > 0 {
+            if animationDuration > 0 {
                 UIView.performWithoutAnimation {
                     view.frame = CGRect(x: 0, y: originY, width: bounds.size.width, height: 0)
                     view.layoutSubviewsOnly()
@@ -136,7 +151,7 @@ open class AnimatableStackView: UIStackView {
         
         allNewViewsWithDeletedViews.forEach { view in
             // Fixing view's width. It might be wrong in a case stack view height is zero.
-            if UIView.inheritedAnimationDuration > 0 {
+            if animationDuration > 0 {
                 UIView.performWithoutAnimation {
                     view.frame.size.width = bounds.size.width
                     view.layoutSubviewsOnly()
@@ -147,13 +162,12 @@ open class AnimatableStackView: UIStackView {
         }
         
         //// 4. Hide deleted views and remove them from arranged subviews after animation is done.
-        // Note: Async is unsafe and can be improved later with additional checks if needed.
         viewsToDelete.forEach { $0.isHidden = true }
         
-        let animationDuration = UIView.inheritedAnimationDuration
-        let delayTime: DispatchTime = .now() + animationDuration
-        DispatchQueue.main.asyncAfter(deadline: delayTime) {
+        // Note: Async is unsafe and can be improved later with additional checks if needed.
+        Utils.performInMain(animationDuration) {
             viewsToDelete.forEach { self.removeSubview($0) }
+            self.viewsPool.add(viewsToDelete)
         }
         
         //// 5. Update existing views
@@ -178,9 +192,6 @@ open class AnimatableStackView: UIStackView {
         
         // Restore vertical position
         frame.origin.y = initialOriginY
-        
-        // Add view to the pool
-        AnimatableStackView.pool.add(viewsToDelete)
     }
     
     // ******************************* MARK: - Public Methods
@@ -215,5 +226,37 @@ open class AnimatableStackView: UIStackView {
         
         // Update constraints so we won't have issues if we add the same views later.
         layoutIfNeeded()
+    }
+}
+
+private final class ViewsPool {
+    
+    typealias Closure = (AnimatableStackView.Subview) -> Void
+    
+    // TODO: Can be improved by using dictionary but we need a performant way of converting `viewClass` to a hash.
+    private var views: [AnimatableStackView.Subview] = []
+    
+    func add(_ views: [AnimatableStackView.Subview]) {
+        self.views.append(contentsOf: views)
+    }
+    
+    func get(viewModel: AnimatableStackView.ViewModel, onCreation: Closure = { _ in }, beforeReuse: Closure = { _ in }) -> AnimatableStackView.Subview {
+        
+        if let existingViewIndex = views.firstIndex(where: { type(of: $0) == viewModel.animatableStackViewClass }) {
+            let existingView = views.remove(at: existingViewIndex)
+            UIView.performWithoutAnimation {
+                beforeReuse(existingView)
+                existingView.configure(viewModel: viewModel)
+            }
+            return existingView
+            
+        } else {
+            var view: AnimatableStackView.Subview!
+            UIView.performWithoutAnimation {
+                view = viewModel.animatableStackViewClass.create(viewModel: viewModel)
+                onCreation(view)
+            }
+            return view
+        }
     }
 }

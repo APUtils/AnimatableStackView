@@ -21,7 +21,7 @@ extension UILabel: AnimatableStackView_Subview, AnimatableView_Subview {
             objc_setAssociatedObject(self, &c_viewModelAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    public var viewModel: Any? {
+    public var animatableViewModel: Any? {
         _viewModel
     }
     

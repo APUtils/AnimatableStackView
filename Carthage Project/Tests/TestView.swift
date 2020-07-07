@@ -64,5 +64,5 @@ extension TestView: AnimatableStackView_Subview {
 // ******************************* MARK: - AnimatableView_Subview
 
 extension TestView: AnimatableView_Subview {
-    var viewModel: Any? { vm }
+    var animatableViewModel: Any? { vm }
 }

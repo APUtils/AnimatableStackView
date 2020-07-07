@@ -11,7 +11,7 @@ import UIKit
 
 /// Subview that can be created with view model and has an ID.
 public protocol AnimatableView_Subview: UIView, CreatableWithViewModel, Identifiable {
-    var viewModel: Any? { get }
+    var animatableViewModel: Any? { get }
 }
 
 /// View model that has ID and view class to which it belong.
@@ -262,7 +262,7 @@ private final class ViewsPool {
             let existingView = views.remove(at: existingViewIndex)
             UIView.performWithoutAnimation {
                 beforeReuse(existingView)
-                if let existingViewModel = existingView.viewModel as? AnimatableView.ViewModel {
+                if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
                     if viewModel.hasChanges(from: existingViewModel) {
                         existingView.configure(viewModel: viewModel)
                         afterReuse(existingView, true)
@@ -289,7 +289,7 @@ private final class ViewsPool {
             let existingView = views.remove(at: existingViewIndex)
             UIView.performWithoutAnimation {
                 beforeReuse(existingView)
-                if let existingViewModel = existingView.viewModel as? AnimatableView.ViewModel {
+                if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
                     if viewModel.hasChanges(from: existingViewModel) {
                         existingView.configure(viewModel: viewModel)
                         afterReuse(existingView, true)

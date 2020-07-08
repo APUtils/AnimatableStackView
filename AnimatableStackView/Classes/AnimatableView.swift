@@ -17,8 +17,11 @@ public protocol AnimatableView_Subview: UIView, CreatableWithViewModel, Identifi
 /// View model that has ID and view class to which it belong.
 public protocol AnimatableView_ViewModel: Identifiable {
     var animatableViewClass: AnimatableView_Subview.Type { get }
-    func copy() -> Self
     func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool
+}
+
+extension AnimatableView_ViewModel {
+    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool { true }
 }
 
 /// View that groups subviews in the vertical stack and animates chages.

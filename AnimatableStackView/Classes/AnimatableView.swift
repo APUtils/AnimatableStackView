@@ -175,6 +175,15 @@ open class AnimatableView: UIView {
         
         visibleViews = newViews
     }
+    
+    // ******************************* MARK: - Other Public Methods
+    
+    /// Find view that corresponds to passed identity. E.g. you can pass view model and get view for that.
+    open func getView(identity: Identifiable) -> Subview? {
+        return subviews
+            .compactMap { $0 as? Subview }
+            .first { $0.id == identity.id }
+    }
 }
 
 private var c_topConstraintAssociationKey = 0

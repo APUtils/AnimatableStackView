@@ -194,7 +194,7 @@ open class AnimatableStackView: UIStackView {
         frame.origin.y = initialOriginY
     }
     
-    // ******************************* MARK: - Public Methods
+    // ******************************* MARK: - Other Public Methods
     
     /// Find view that corresponds to passed identity. E.g. you can pass view model and get view for that.
     open func getView(identity: Identifiable) -> Subview? {

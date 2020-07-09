@@ -17,11 +17,11 @@ public protocol AnimatableView_Subview: UIView, CreatableWithViewModel, Identifi
 /// View model that has ID and view class to which it belong.
 public protocol AnimatableView_ViewModel: Identifiable {
     var animatableViewClass: AnimatableView_Subview.Type { get }
-    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool
+    func hasChanges(from viewModel: Any?) -> Bool
 }
 
-extension AnimatableView_ViewModel {
-    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool { true }
+public extension AnimatableView_ViewModel {
+    func hasChanges(from viewModel: Any?) -> Bool { true }
 }
 
 /// View that groups subviews in the vertical stack and animates chages.
@@ -134,7 +134,9 @@ open class AnimatableView: UIView {
             if let existingView = visibleViews.first(where: { $0.id == viewModel.id }) {
                 // Update
                 view = existingView
-                view.configure(viewModel: viewModel)
+                if viewModel.hasChanges(from: existingView.animatableViewModel) {
+                    view.configure(viewModel: viewModel)
+                }
                 
             } else if let (existingReusableView, hasChanges) = existingReusableViews[viewModel.id] {
                 // Reuse existing
@@ -158,8 +160,11 @@ open class AnimatableView: UIView {
                 view.animateFadeInIfNeeded()
             }
             
-            // Ignore invisible views
-            guard view.isVisible else { return }
+            // Return an invisible view to the views pool
+            guard view.isVisible else {
+                viewsPool.add(view)
+                return
+            }
             
             let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
             view.constraintFromTopIfNeeded(to: previousView, anchor: anchor, in: self).flatMap { constraints.append($0) }
@@ -176,7 +181,7 @@ open class AnimatableView: UIView {
         /// Find removed views
         let removedViews = previousViews
             .filter { previousView in !newViews.contains { $0 === previousView } }
-            
+        
         /// Fade out
         removedViews.forEach {
             if $0.isVisible {
@@ -275,6 +280,10 @@ private final class ViewsPool {
     // TODO: Can be improved by using dictionary but we need a performant way of converting `viewClass` to a hash.
     private var views: [AnimatableView.Subview] = []
     
+    func add(_ view: AnimatableView.Subview) {
+        self.views.append(view)
+    }
+    
     func add(_ views: [AnimatableView.Subview]) {
         self.views.append(contentsOf: views)
     }
@@ -285,17 +294,11 @@ private final class ViewsPool {
             let existingView = views.remove(at: existingViewIndex)
             existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
-                if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
-                    if viewModel.hasChanges(from: existingViewModel) {
-                        existingView.configure(viewModel: viewModel)
-                        afterReuse(existingView, true)
-                    } else {
-                        afterReuse(existingView, false)
-                    }
-                    
-                } else {
+                if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
                     existingView.configure(viewModel: viewModel)
                     afterReuse(existingView, true)
+                } else {
+                    afterReuse(existingView, false)
                 }
             }
             return existingView
@@ -312,17 +315,11 @@ private final class ViewsPool {
             let existingView = views.remove(at: existingViewIndex)
             existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
-                if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
-                    if viewModel.hasChanges(from: existingViewModel) {
-                        existingView.configure(viewModel: viewModel)
-                        afterReuse(existingView, true)
-                    } else {
-                        afterReuse(existingView, false)
-                    }
-                    
-                } else {
+                if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
                     existingView.configure(viewModel: viewModel)
                     afterReuse(existingView, true)
+                } else {
+                    afterReuse(existingView, false)
                 }
             }
             return existingView

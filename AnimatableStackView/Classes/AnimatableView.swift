@@ -99,19 +99,22 @@ open class AnimatableView: UIView {
             // Ignore invisible views
             guard view.isVisible else { return }
             
-            view.performNonAnimatedForInvisible {
-                let y = previousView == self ? 0 : previousView.frame.maxY
-                if hasChanges {
-                    let height = view.fixedSystemLayoutSizeFitting(.init(width: bounds.width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .init(0.001)).height
-                    let frame = CGRect(x: 0, y: y, width: bounds.width, height: height)
-                    view.frame = frame
-                    view.layoutSubviewsOnly()
-                } else {
-                    view.frame.origin.y = y
+            // Prepare for animation if needed
+            if UIView.isAnimating {
+                view.performNonAnimatedForInvisible {
+                    let y = previousView == self ? 0 : previousView.frame.maxY
+                    if hasChanges {
+                        let height = view.fixedSystemLayoutSizeFitting(.init(width: bounds.width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .init(0.001)).height
+                        let frame = CGRect(x: 0, y: y, width: bounds.width, height: height)
+                        view.frame = frame
+                        view.layoutSubviewsOnly()
+                    } else {
+                        view.frame.origin.y = y
+                    }
+                    
+                    // Sned to back so new views will slide from under existing ones.
+                    sendSubviewToBack(view)
                 }
-                
-                // Sned to back so new views will slide from under existing ones.
-                sendSubviewToBack(view)
             }
         }
         
@@ -379,16 +382,14 @@ private extension UIView {
     
     func animateFadeInIfNeeded() {
         // Nothing to animate if not visible or not animatable
-        guard isVisible, isAnimatable else { return }
+        guard UIView.isAnimating, isVisible, isAnimatable else { return }
         
-        if UIView.isAnimating {
-            layer.removeAnimation(forKey: "opacity")
-            let originalAlpha = alpha
-            UIView.performWithoutAnimation {
-                alpha = 0
-            }
-            alpha = originalAlpha
+        layer.removeAnimation(forKey: "opacity")
+        let originalAlpha = alpha
+        UIView.performWithoutAnimation {
+            alpha = 0
         }
+        alpha = originalAlpha
     }
     
     var originalAlpha: CGFloat? {

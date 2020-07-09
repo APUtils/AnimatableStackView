@@ -37,9 +37,17 @@ open class AnimatableView: UIView {
     
     // ******************************* MARK: - Properties
     
-    /// Array of `Views` that animatable view is currently displaying.
     private var previousViewModels: [ViewModel] = []
+    
+    /// Array of `Views` that animatable view is currently displaying. View is considered visible if it's
+    /// alpha is more than or equal to 0.01 and `isHidden` property is `false.`
+    /// - warning: You should not check `subviews` property since it contains reusable and invisible views
+    /// and their position might be ambiguous in that state.
     public private(set) var visibleViews: [Subview] = []
+    
+    /// - warning: You should not check `subviews` property since it contains reusable and invisible views
+    /// and their position might be ambiguous in that state.
+    open override var subviews: [UIView] { super.subviews }
     
     private let viewsPool = ViewsPool()
     
@@ -88,7 +96,7 @@ open class AnimatableView: UIView {
             // Ignore invisible views
             guard view.isVisible else { return }
             
-            UIView.performWithoutAnimation {
+            view.performNonAnimatedForInvisible {
                 let y = previousView == self ? 0 : previousView.frame.maxY
                 if hasChanges {
                     let height = view.fixedSystemLayoutSizeFitting(.init(width: bounds.width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .init(0.001)).height
@@ -170,11 +178,7 @@ open class AnimatableView: UIView {
         /// Fade out
         removedViews.forEach { $0.alpha = 0 }
         
-        /// Add to reuse pool after animation is finished
-        // Note: Async is unsafe and can be improved later with additional checks if needed.
-        Utils.performInMain(UIView.inheritedAnimationDuration) {
-            self.viewsPool.add(removedViews)
-        }
+        viewsPool.add(removedViews)
         
         visibleViews = newViews
     }
@@ -272,7 +276,7 @@ private final class ViewsPool {
         if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
             let existingView = views.remove(at: existingViewIndex)
-            UIView.performWithoutAnimation {
+            existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
                     if viewModel.hasChanges(from: existingViewModel) {
@@ -299,7 +303,7 @@ private final class ViewsPool {
         if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
             let existingView = views.remove(at: existingViewIndex)
-            UIView.performWithoutAnimation {
+            existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 if let existingViewModel = existingView.animatableViewModel as? AnimatableView.ViewModel {
                     if viewModel.hasChanges(from: existingViewModel) {
@@ -322,7 +326,7 @@ private final class ViewsPool {
                 views.remove(at: existingViewIndex)
             }
             
-            UIView.performWithoutAnimation {
+            existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 existingView.configure(viewModel: viewModel)
                 afterReuse(existingView, true)
@@ -379,6 +383,32 @@ private extension UIView {
         }
     }
     
+    func performNonAnimatedForInvisible(_ closure: () -> Void) {
+        if let presentation = layer.presentation() {
+            if presentation.isHidden || presentation.opacity < 0.01 {
+                // Invisible during animation
+                layer.removeAllAnimationsRecursively()
+                UIView.performWithoutAnimation {
+                    closure()
+                }
+            } else {
+                closure()
+            }
+            
+        } else {
+            // No presentation layer for some reason
+            if isVisible {
+                // Just visible
+                closure()
+                
+            } else {
+                // Just invisible
+                UIView.performWithoutAnimation {
+                    closure()
+                }
+            }
+        }
+    }
     
     @available(iOS 8.0, *)
     func fixedSystemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
@@ -421,5 +451,13 @@ private extension UIView {
         } else {
             return systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
         }
+    }
+}
+
+extension CALayer {
+    
+    func removeAllAnimationsRecursively() {
+        removeAllAnimations()
+        sublayers?.forEach { $0.removeAllAnimationsRecursively() }
     }
 }

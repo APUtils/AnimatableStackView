@@ -38,42 +38,42 @@ final class ViewController: UIViewController {
     // ******************************* MARK: - Actions
     
     @IBAction private func onAnimateTap(_ sender: Any) {
-        UIView.animate(withDuration: 2) {
+        g.animate(2) {
             self.stackView.update(viewModels: self.vms1)
             self.containerView.update(viewModels: self.vms1)
             self.view.layoutIfNeeded()
         }
         
         g.asyncMain(2) {
-            UIView.animate(withDuration: 2) {
+            g.animate(2) {
                 self.stackView.update(viewModels: self.vms2)
                 self.containerView.update(viewModels: self.vms2)
                 self.view.layoutIfNeeded()
             }
             
             g.asyncMain(2) {
-                UIView.animate(withDuration: 2) {
+                g.animate(2) {
                     self.stackView.update(viewModels: self.vms3)
                     self.containerView.update(viewModels: self.vms3)
                     self.view.layoutIfNeeded()
                 }
                 
                 g.asyncMain(2) {
-                    UIView.animate(withDuration: 2) {
+                    g.animate(2) {
                         self.stackView.update(viewModels: self.vms2)
                         self.containerView.update(viewModels: self.vms2)
                         self.view.layoutIfNeeded()
                     }
                     
                     g.asyncMain(2) {
-                        UIView.animate(withDuration: 2) {
+                        g.animate(2) {
                             self.stackView.update(viewModels: self.vms1)
                             self.containerView.update(viewModels: self.vms1)
                             self.view.layoutIfNeeded()
                         }
                         
                         g.asyncMain(2) {
-                            UIView.animate(withDuration: 2) {
+                            g.animate(2) {
                                 self.stackView.update(viewModels: self.vms4)
                                 self.containerView.update(viewModels: self.vms4)
                                 self.view.layoutIfNeeded()
@@ -86,7 +86,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func onAnimate2Tap(_ sender: Any) {
-        UIView.animate(withDuration: 2) {
+        g.animate(2) {
             self.hideVMs.modifyForEach { $1.isHidden.toggle() }
             self.stackView.update(viewModels: self.hideVMs)
             self.containerView.update(viewModels: self.hideVMs)

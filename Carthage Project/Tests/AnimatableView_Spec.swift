@@ -69,28 +69,28 @@ class AnimatableView_Spec: QuickSpec {
             
             hostView.layoutIfNeeded()
             
-            let vms100 = stride(from: 0, to: 100, by: 1).map { "\($0)" }
-            let vms50 = stride(from: 0, to: 50, by: 1).map { "\($0)" }
+            let vmsFirst = stride(from: 0, to: 200, by: 1).map { "\($0)" }
+            let vmsSecond = stride(from: 0, to: 100, by: 1).map { "\($0)" }
             
             let date1 = Date()
-            sv.update(viewModels: vms100, postLayout: false)
+            sv.update(viewModels: vmsFirst, postLayout: false)
             hostView.layoutIfNeeded()
             let executionTime1 = Date().timeIntervalSince(date1)
             
             let date2 = Date()
             sv.update(viewModels: [], postLayout: false)
-            sv.update(viewModels: vms50, postLayout: false)
+            sv.update(viewModels: vmsSecond, postLayout: false)
             hostView.layoutIfNeeded()
             let executionTime2 = Date().timeIntervalSince(date2)
             
             let date3 = Date()
-            av.update(viewModels: vms100)
+            av.update(viewModels: vmsFirst)
             hostView.layoutIfNeeded()
             let executionTime3 = Date().timeIntervalSince(date3)
             
             let date4 = Date()
             av.update(viewModels: [])
-            av.update(viewModels: vms50)
+            av.update(viewModels: vmsSecond)
             hostView.layoutIfNeeded()
             let executionTime4 = Date().timeIntervalSince(date4)
             

@@ -42,11 +42,11 @@ open class AnimatableView: UIView {
     /// Array of `Views` that animatable view is currently displaying. View is considered visible if it's
     /// alpha is more than or equal to 0.01 and `isHidden` property is `false.`
     /// - warning: You should not check `subviews` property since it contains reusable and invisible views
-    /// and their position might be ambiguous in that state.
+    /// and their position and order might be ambiguous in that state.
     public private(set) var visibleViews: [Subview] = []
     
     /// - warning: You should not check `subviews` property since it contains reusable and invisible views
-    /// and their position might be ambiguous in that state.
+    /// and their position and order might be ambiguous in that state.
     open override var subviews: [UIView] { super.subviews }
     
     private let viewsPool = ViewsPool()
@@ -88,8 +88,10 @@ open class AnimatableView: UIView {
     open func update(viewModels: [ViewModel]) {
         
         func beforeReuse(view: UIView) {
-            // Fade in
-            view.alpha = 1
+            // Restore original alpha
+            if let originalAlpha = view.originalAlpha {
+                view.alpha = originalAlpha
+            }
         }
         
         func afterReuse(view: UIView, previousView: UIView, hasChanges: Bool) {
@@ -176,7 +178,12 @@ open class AnimatableView: UIView {
             .filter { previousView in !newViews.contains { $0 === previousView } }
             
         /// Fade out
-        removedViews.forEach { $0.alpha = 0 }
+        removedViews.forEach {
+            if $0.isVisible {
+                $0.originalAlpha = $0.alpha
+                $0.alpha = 0
+            }
+        }
         
         viewsPool.add(removedViews)
         
@@ -360,6 +367,8 @@ extension Sequence {
     }
 }
 
+private var c_fadedOutAssociationKey = 0
+
 private extension UIView {
     
     static var isAnimating: Bool { inheritedAnimationDuration > 0 }
@@ -380,6 +389,15 @@ private extension UIView {
                 alpha = 0
             }
             alpha = originalAlpha
+        }
+    }
+    
+    var originalAlpha: CGFloat? {
+        get {
+            return objc_getAssociatedObject(self, &c_fadedOutAssociationKey) as? CGFloat
+        }
+        set {
+            objc_setAssociatedObject(self, &c_fadedOutAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

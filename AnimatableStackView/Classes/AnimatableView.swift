@@ -91,6 +91,7 @@ open class AnimatableView: UIView {
             // Restore original alpha
             if let originalAlpha = view.originalAlpha {
                 view.alpha = originalAlpha
+                view.originalAlpha = nil
             }
         }
         
@@ -115,10 +116,9 @@ open class AnimatableView: UIView {
         }
         
         // Reusing views with the same ID first
-        let existingReusableViews: [String: (Subview, Bool)] = viewModels.dictionaryMap { viewModel in
-            var hasChanges = true
-            if let view = viewsPool.getExisting(viewModel: viewModel, beforeReuse: beforeReuse, afterReuse: { _, _hasChanges in hasChanges = _hasChanges } ) {
-                return (viewModel.id, (view, hasChanges))
+        let existingReusableViews: [String: Subview] = viewModels.dictionaryMap { viewModel in
+            if let view = viewsPool.getExistingNonConfiguredView(viewModel: viewModel) {
+                return (viewModel.id, view)
             } else {
                 return nil
             }
@@ -138,16 +138,26 @@ open class AnimatableView: UIView {
                     view.configure(viewModel: viewModel)
                 }
                 
-            } else if let (existingReusableView, hasChanges) = existingReusableViews[viewModel.id] {
+            } else if let existingReusableView = existingReusableViews[viewModel.id] {
                 // Reuse existing
-                afterReuse(view: existingReusableView, previousView: previousView, hasChanges: hasChanges)
+                existingReusableView.performNonAnimatedForInvisible {
+                    beforeReuse(view: existingReusableView)
+                    if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {
+                        existingReusableView.configure(viewModel: viewModel)
+                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: true)
+                        
+                    } else {
+                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: false)
+                    }
+                }
+                
                 view = existingReusableView
                 view.animateFadeInIfNeeded()
                 
             } else {
                 
                 // Reuse or creation
-                view = viewsPool.get(viewModel: viewModel, onCreation: { view in
+                view = viewsPool.getConfiguredView(viewModel: viewModel, onCreation: { view in
                     afterReuse(view: view, previousView: previousView, hasChanges: true)
                     
                     // Insert at 0 so new views will slide from under existing ones.
@@ -288,19 +298,10 @@ private final class ViewsPool {
         self.views.append(contentsOf: views)
     }
     
-    func getExisting(viewModel: AnimatableView.ViewModel, beforeReuse: ViewClosure = { _ in }, afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview? {
+    func getExistingNonConfiguredView(viewModel: AnimatableView.ViewModel) -> AnimatableView.Subview? {
         if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
             let existingView = views.remove(at: existingViewIndex)
-            existingView.performNonAnimatedForInvisible {
-                beforeReuse(existingView)
-                if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
-                    existingView.configure(viewModel: viewModel)
-                    afterReuse(existingView, true)
-                } else {
-                    afterReuse(existingView, false)
-                }
-            }
             return existingView
             
         } else {
@@ -308,7 +309,7 @@ private final class ViewsPool {
         }
     }
     
-    func get(viewModel: AnimatableView.ViewModel, onCreation: ViewClosure = { _ in }, beforeReuse: ViewClosure = { _ in }, afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview {
+    func getConfiguredView(viewModel: AnimatableView.ViewModel, onCreation: ViewClosure = { _ in }, beforeReuse: ViewClosure = { _ in }, afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview {
         
         if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
@@ -381,6 +382,7 @@ private extension UIView {
         guard isVisible, isAnimatable else { return }
         
         if UIView.isAnimating {
+            layer.removeAnimation(forKey: "opacity")
             let originalAlpha = alpha
             UIView.performWithoutAnimation {
                 alpha = 0

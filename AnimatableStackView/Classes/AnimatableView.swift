@@ -17,6 +17,8 @@ public protocol AnimatableView_Subview: UIView, CreatableWithViewModel, Identifi
 /// View model that has ID and view class to which it belong.
 public protocol AnimatableView_ViewModel: Identifiable {
     var animatableViewClass: AnimatableView_Subview.Type { get }
+    
+    // Optional method that may be used to prevent updates if the view model doesn't have any changes compared to an another.
     func hasChanges(from viewModel: Any?) -> Bool
 }
 
@@ -95,12 +97,12 @@ open class AnimatableView: UIView {
             }
         }
         
-        func afterReuse(view: UIView, previousView: UIView, hasChanges: Bool) {
+        func afterReuse(view: UIView, previousView: UIView, hasChanges: Bool, isAnimating: Bool) {
             // Ignore invisible views
             guard view.isVisible else { return }
             
             // Prepare for animation if needed
-            if UIView.isAnimating {
+            if isAnimating {
                 view.performNonAnimatedForInvisible {
                     let y = previousView == self ? 0 : previousView.frame.maxY
                     if hasChanges {
@@ -127,6 +129,7 @@ open class AnimatableView: UIView {
             }
         }
         
+        let isAnimating = UIView.isAnimating
         let previousViews = visibleViews
         var newViews: [Subview] = []
         var previousView: UIView = self
@@ -147,10 +150,10 @@ open class AnimatableView: UIView {
                     beforeReuse(view: existingReusableView)
                     if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {
                         existingReusableView.configure(viewModel: viewModel)
-                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: true)
+                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: true, isAnimating: isAnimating)
                         
                     } else {
-                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: false)
+                        afterReuse(view: existingReusableView, previousView: previousView, hasChanges: false, isAnimating: isAnimating)
                     }
                 }
                 
@@ -161,14 +164,14 @@ open class AnimatableView: UIView {
                 
                 // Reuse or creation
                 view = viewsPool.getConfiguredView(viewModel: viewModel, onCreation: { view in
-                    afterReuse(view: view, previousView: previousView, hasChanges: true)
+                    afterReuse(view: view, previousView: previousView, hasChanges: true, isAnimating: isAnimating)
                     
                     // Insert at 0 so new views will slide from under existing ones.
                     insertSubview(view, at: 0)
                     
                     constraints.append(view.leadingAnchor.constraint(equalTo: leadingAnchor))
                     constraints.append(view.trailingAnchor.constraint(equalTo: trailingAnchor))
-                }, beforeReuse: beforeReuse, afterReuse: { afterReuse(view: $0, previousView: previousView, hasChanges: $1) })
+                }, beforeReuse: beforeReuse, afterReuse: { afterReuse(view: $0, previousView: previousView, hasChanges: $1, isAnimating: isAnimating) })
                 
                 view.animateFadeInIfNeeded()
             }

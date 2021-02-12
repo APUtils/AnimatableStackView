@@ -42,6 +42,8 @@ open class AnimatableStackView: UIStackView {
         zeroHeightView.backgroundColor = .clear
         zeroHeightView.translatesAutoresizingMaskIntoConstraints = false
         zeroHeightView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+        zeroHeightView.accessibilityIdentifier = "Layout Fix View Do Not Remove"
+        
         return zeroHeightView
     }()
     

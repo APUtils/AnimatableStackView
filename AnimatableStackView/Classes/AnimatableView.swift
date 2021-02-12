@@ -84,7 +84,6 @@ open class AnimatableView: UIView {
     /// May be called inside animation block.
     /// If called inside animation block `layoutIfNeeded()` should be called on base view,
     /// e.g. view controller's view for animations to work.
-    /// for animations to work.
     /// - parameter viewModels: View models that will be used to configure a new state.
     /// Views will be reused or created whenever needed and properly attached so animation will be smooth.
     open func update(viewModels: [ViewModel]) {

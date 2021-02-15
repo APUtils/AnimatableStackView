@@ -69,7 +69,7 @@ extension String: AnimatableView_ViewModel {
         return UILabel.self
     }
     
-    public func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool {
+    public func hasChanges(from viewModel: Any?) -> Bool {
         if let string = viewModel as? String {
             return self != string
         } else {

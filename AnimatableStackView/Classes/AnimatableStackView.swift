@@ -75,7 +75,10 @@ open class AnimatableStackView: UIStackView {
     /// e.g. view controller's view for animations to work.
     /// - parameter viewModels: View models that will be used to configure a new state.
     /// - parameter postLayout: Post layout is required to update inner constraints so resizeable table view cells can update their heights but in some cases you may want to delay `layoutIfNeeded()` call. For example, if you have constraints outside of stack view and you want to animate everything together.
+    ///
     /// Views will be reused or created whenever needed and properly attached so animation will be smooth.
+    ///
+    /// - warning: View model and view (after configuration) IDs should match for the reuse logic to work. Basicaly, you should just return view model's ID after your view was configured with it.
     open func update(viewModels: [ViewModel], postLayout: Bool = true) {
         
         let animationDuration = UIView.inheritedAnimationDuration

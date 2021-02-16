@@ -85,7 +85,10 @@ open class AnimatableView: UIView {
     /// If called inside animation block `layoutIfNeeded()` should be called on base view,
     /// e.g. view controller's view for animations to work.
     /// - parameter viewModels: View models that will be used to configure a new state.
+    ///
     /// Views will be reused or created whenever needed and properly attached so animation will be smooth.
+    ///
+    /// - warning: View model and view (after configuration) IDs should match for the reuse logic to work. Basicaly, you should just return view model's ID after your view was configured with it.
     open func update(viewModels: [ViewModel]) {
         
         func beforeReuse(view: UIView) {

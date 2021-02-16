@@ -25,10 +25,10 @@ cd "$base_dir"
 # includes
 . ./utils.sh
 
-cd ..
-cd ..
-
 applyXcode12Workaround
+
+cd ..
+cd ..
 
 # Try one level up if didn't find Cartfile.
 if [ ! -f "Cartfile" ]; then

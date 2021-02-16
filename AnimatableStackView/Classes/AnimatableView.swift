@@ -141,6 +141,7 @@ open class AnimatableView: UIView {
                 view = existingView
                 if viewModel.hasChanges(from: existingView.animatableViewModel) {
                     view.configure(viewModel: viewModel)
+                    checkID(subview: view, viewModel: viewModel)
                 }
                 
             } else if let existingReusableView = existingReusableViews[viewModel.id] {
@@ -150,6 +151,7 @@ open class AnimatableView: UIView {
                     if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {
                         existingReusableView.configure(viewModel: viewModel)
                         afterReuse(view: existingReusableView, previousView: previousView, hasChanges: true, isAnimating: isAnimating)
+                        checkID(subview: view, viewModel: viewModel)
                         
                     } else {
                         afterReuse(view: existingReusableView, previousView: previousView, hasChanges: false, isAnimating: isAnimating)
@@ -324,6 +326,8 @@ private final class ViewsPool {
                 if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
                     existingView.configure(viewModel: viewModel)
                     afterReuse(existingView, true)
+                    checkID(subview: existingView, viewModel: viewModel)
+                    
                 } else {
                     afterReuse(existingView, false)
                 }
@@ -340,6 +344,7 @@ private final class ViewsPool {
                 beforeReuse(existingView)
                 existingView.configure(viewModel: viewModel)
                 afterReuse(existingView, true)
+                checkID(subview: existingView, viewModel: viewModel)
             }
             
             return existingView
@@ -479,5 +484,11 @@ extension CALayer {
     func removeAllAnimationsRecursively() {
         removeAllAnimations()
         sublayers?.forEach { $0.removeAllAnimationsRecursively() }
+    }
+}
+
+private func checkID(subview: AnimatableView_Subview, viewModel: AnimatableView_ViewModel) {
+    if subview.id != viewModel.id {
+        print("[AnimatableView] ERROR: View should have the same ID as view model after configuration. Please check. View ID '\(subview.id)' != view model ID '\(viewModel.id)'")
     }
 }

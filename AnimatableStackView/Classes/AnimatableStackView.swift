@@ -85,7 +85,10 @@ open class AnimatableStackView: UIStackView {
         // - New views
         // - Deleted views
         // - Updated views
+        
+        // All views for new `viewModels` (insert + update)
         var allNewViews: [Subview] = []
+        
         var viewsToInsert: [Subview] = []
         var viewsToDelete: [Subview] = []
         var viewsToUpdate: [Subview] = []
@@ -176,6 +179,7 @@ open class AnimatableStackView: UIStackView {
         viewsToUpdate.forEach { view in
             guard let viewModel = viewModels.first(where: { $0.id == view.id }) else { return }
             view.configure(viewModel: viewModel)
+            checkID(subview: view, viewModel: viewModel)
         }
         
         views = allNewViews
@@ -249,6 +253,7 @@ private final class ViewsPool {
             UIView.performWithoutAnimation {
                 beforeReuse(existingView)
                 existingView.configure(viewModel: viewModel)
+                checkID(subview: existingView, viewModel: viewModel)
             }
             return existingView
             
@@ -257,8 +262,15 @@ private final class ViewsPool {
             UIView.performWithoutAnimation {
                 view = viewModel.animatableStackViewClass.create(viewModel: viewModel)
                 onCreation(view)
+                checkID(subview: view, viewModel: viewModel)
             }
             return view
         }
+    }
+}
+
+private func checkID(subview: AnimatableStackView_Subview, viewModel: AnimatableStackView_ViewModel) {
+    if subview.id != viewModel.id {
+        print("[AnimatableStackView] ERROR: View should have the same ID as view model after configuration. Please check. View ID '\(subview.id)' != view model ID '\(viewModel.id)'")
     }
 }

@@ -120,9 +120,7 @@ open class AnimatableStackView: UIStackView {
         
         //// 2. Insert new views collapsed at proper positions depending on old views layout.
         
-        if hasViews {
-            clear()
-        }
+        clear()
         
         viewsToInsert.forEach { view in
             let originY: CGFloat
@@ -234,9 +232,13 @@ open class AnimatableStackView: UIStackView {
     
     /// Properly removes all arranged subviews from stack view.
     private func clear() {
-        arrangedSubviews
+        let subviews = arrangedSubviews
             .filter { $0 != zeroHeightView }
-            .forEach(removeSubview)
+        
+        // Check if there is somethign to remove
+        guard subviews.count > 0 else { return }
+        
+        subviews.forEach(removeSubview)
         
         // Update constraints so we won't have issues if we add the same views later.
         layoutIfNeeded()

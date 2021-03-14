@@ -81,6 +81,7 @@ open class AnimatableStackView: UIStackView {
     /// - warning: View model and view (after configuration) IDs should match for the reuse logic to work. Basicaly, you should just return view model's ID after your view was configured with it.
     open func update(viewModels: [ViewModel], postLayout: Bool = true) {
         
+        let hasViews = views.count > 0
         let animationDuration = UIView.inheritedAnimationDuration
         let initialOriginY = frame.origin.y
         
@@ -119,7 +120,9 @@ open class AnimatableStackView: UIStackView {
         
         //// 2. Insert new views collapsed at proper positions depending on old views layout.
         
-        clear()
+        if hasViews {
+            clear()
+        }
         
         viewsToInsert.forEach { view in
             let originY: CGFloat
@@ -191,8 +194,10 @@ open class AnimatableStackView: UIStackView {
         // this update till the end of the animation closure. The bad thing is we might need to know
         // exact stack view and its elements positions during animation computation.
         // So to force layout we are removing and then adding back all views.
-        clear()
-        allNewViewsWithDeletedViews.forEach { addArrangedSubview($0) }
+        if animationDuration > 0 {
+            clear()
+            allNewViewsWithDeletedViews.forEach { addArrangedSubview($0) }
+        }
         
         // Force constraints layout to support height update inside cells
         if postLayout {

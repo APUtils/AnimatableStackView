@@ -40,7 +40,7 @@ enum Utils {
             beforeLayout?()
             resizeableScreenWidthView.layoutIfNeededInWindow()
             
-            expect(resizeableScreenWidthView, file: file, line: line).to(haveValidSnapshot())
+            expect(file: file, line: line, resizeableScreenWidthView).to(haveValidSnapshot())
         }
     }
 }

@@ -33,7 +33,7 @@ extension TestViewModel: AnimatableView_ViewModel {
     
     func copy() -> TestViewModel { self }
     
-    func hasChanges(from viewModel: AnimatableView_ViewModel) -> Bool {
+    func hasChanges(from viewModel: Any?) -> Bool {
         guard let viewModel = viewModel as? TestViewModel else { return true }
         return backgroundColor != viewModel.backgroundColor
     }

@@ -13,6 +13,8 @@
 		0D949D80247C3B0200C5FAFC /* HideableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D949D7F247C3B0200C5FAFC /* HideableView.swift */; };
 		0D98771D247C3BBA00AA1404 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D98771C247C3BBA00AA1404 /* UIColor+Extension.swift */; };
 		0D9881E024AE22FD00F61B77 /* AnimatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9881DF24AE22FD00F61B77 /* AnimatableView.swift */; };
+		0DA916B72654761B00E9E5AB /* RoutableLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA916B62654761B00E9E5AB /* RoutableLogger.framework */; };
+		0DA916B82654762700E9E5AB /* RoutableLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA916B62654761B00E9E5AB /* RoutableLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0DE1944625D9F42D000EC381 /* APExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		333952BEBCC60FD771D2A75A /* APExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C49B7C1A5A2FA623EB5FC44D /* APExtensions.framework */; };
 		E202681822117D03004CC28A /* AnimatableStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = E202681622117D03004CC28A /* AnimatableStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,6 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0DA916B82654762700E9E5AB /* RoutableLogger.framework in Embed Frameworks */,
 				E275E08422A03A8900E9900C /* AnimatableStackView.framework in Embed Frameworks */,
 				0DE1944625D9F42D000EC381 /* APExtensions.framework in Embed Frameworks */,
 			);
@@ -97,6 +100,7 @@
 		0D949D7F247C3B0200C5FAFC /* HideableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideableView.swift; sourceTree = "<group>"; };
 		0D98771C247C3BBA00AA1404 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0D9881DF24AE22FD00F61B77 /* AnimatableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableView.swift; sourceTree = "<group>"; };
+		0DA916B62654761B00E9E5AB /* RoutableLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RoutableLogger.framework; path = ../Carthage/Build/iOS/RoutableLogger.framework; sourceTree = "<group>"; };
 		2348B7AD6FC366A029681D4B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		27A65933230C2FF4F758F562 /* carthageUpdate.command */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = carthageUpdate.command; path = Scripts/Carthage/carthageUpdate.command; sourceTree = "<group>"; };
 		281AEF37AD4816ADC749CC56 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DA916B72654761B00E9E5AB /* RoutableLogger.framework in Frameworks */,
 				E275E08322A03A8900E9900C /* AnimatableStackView.framework in Frameworks */,
 				333952BEBCC60FD771D2A75A /* APExtensions.framework in Frameworks */,
 			);
@@ -317,6 +322,7 @@
 				E2C3135A22DF747E00D6797A /* Nimble_Snapshots.framework */,
 				E2A7396D2260D99900E97D55 /* Nimble.framework */,
 				E2A7396C2260D99900E97D55 /* Quick.framework */,
+				0DA916B62654761B00E9E5AB /* RoutableLogger.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -400,7 +406,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Anton Plebanovich";
 				TargetAttributes = {
 					E202681222117D03004CC28A = {

@@ -492,6 +492,7 @@ extension CALayer {
 
 private func checkID(subview: AnimatableView_Subview, viewModel: AnimatableView_ViewModel) {
     if subview.id != viewModel.id {
+        // TODO: Routable logger
         print("[AnimatableView] ERROR: View should have the same ID as view model after configuration. Please check. View ID '\(subview.id)' != view model ID '\(viewModel.id)'")
     }
 }

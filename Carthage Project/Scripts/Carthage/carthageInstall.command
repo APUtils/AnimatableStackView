@@ -5,7 +5,7 @@
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 set -e
 
-declare -a tests_frameworks=("github \"Quick\/Nimble\"" "github \"Quick\/Quick\"")
+declare -a tests_frameworks=("github \"Quick\/Nimble\"" "github \"Quick\/Quick\"" "github \"uber\/ios-snapshot-test-case\"" "github \"ashfurrow\/Nimble-Snapshots\"")
 
 disableTestsFramework() {
     previous_cartfile=`cat "Cartfile.resolved"`
@@ -23,8 +23,9 @@ enableTestsFramework() {
 }
 
 # Assume scripts are placed in /Scripts/Carthage dir
-base_dir=$(dirname "$0")
-cd "$base_dir"
+_script_call_path="${BASH_SOURCE%/*}"
+if [[ ! -d "${_script_call_path}" ]]; then _script_call_path=$(dirname "$0"); fi
+cd "${_script_call_path}"
 
 # includes
 . ./utils.sh
@@ -57,10 +58,11 @@ cartSum=`{ cat Cartfile.resolved; xcrun swift -version; } | md5`
 
 if [ "$prevSum" != "$cartSum" ] || [ ! -d "Carthage/Build/iOS" ]; then
     echo "Carthage frameworks are outdated. Updating..."
+    rm "$cart_sum_file" 2> /dev/null || :
 
     # Install main app frameworks. Ignore tests frameworks.
     disableTestsFramework
-    carthage bootstrap --platform iOS --cache-builds --use-ssh
+    carthage bootstrap --platform iOS,tvOS --cache-builds
     enableTestsFramework
     echo ""
 

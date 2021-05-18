@@ -154,7 +154,7 @@ open class AnimatableView: UIView {
                     if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {
                         existingReusableView.configure(viewModel: viewModel)
                         afterReuse(view: existingReusableView, previousView: previousView, hasChanges: true, isAnimating: isAnimating)
-                        checkID(subview: view, viewModel: viewModel)
+                        checkID(subview: existingReusableView, viewModel: viewModel)
                         
                     } else {
                         afterReuse(view: existingReusableView, previousView: previousView, hasChanges: false, isAnimating: isAnimating)

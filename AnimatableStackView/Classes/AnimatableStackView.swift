@@ -81,7 +81,6 @@ open class AnimatableStackView: UIStackView {
     /// - warning: View model and view (after configuration) IDs should match for the reuse logic to work. Basicaly, you should just return view model's ID after your view was configured with it.
     open func update(viewModels: [ViewModel], postLayout: Bool = true) {
         
-        let hasViews = views.count > 0
         let animationDuration = UIView.inheritedAnimationDuration
         let initialOriginY = frame.origin.y
         

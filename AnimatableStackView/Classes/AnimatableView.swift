@@ -357,6 +357,10 @@ private final class ViewsPool {
             var view: AnimatableView.Subview!
             UIView.performWithoutAnimation {
                 view = viewModel.animatableViewClass.create(viewModel: viewModel)
+                
+                // View will be managed by constraints so make sure mask is disabled
+                view.translatesAutoresizingMaskIntoConstraints = false
+                
                 onCreation(view)
             }
             return view

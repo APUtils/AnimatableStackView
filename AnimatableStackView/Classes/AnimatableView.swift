@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RoutableLogger
 import UIKit
 
 /// Subview that can be created with view model and has an ID.
@@ -359,7 +360,10 @@ private final class ViewsPool {
                 view = viewModel.animatableViewClass.create(viewModel: viewModel)
                 
                 // View will be managed by constraints so make sure mask is disabled
-                view.translatesAutoresizingMaskIntoConstraints = false
+                if view.translatesAutoresizingMaskIntoConstraints {
+                    RoutableLogger.logInfo("Autoresizing mask will be disabled for a view: \(view.description)")
+                    view.translatesAutoresizingMaskIntoConstraints = false
+                }
                 
                 onCreation(view)
             }

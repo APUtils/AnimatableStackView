@@ -1,15 +1,13 @@
 # Deployment Target
 platform :ios, '9.0'
-
+install! 'cocoapods', :warn_for_unused_master_specs_repo => false
 
 # Add pods as frameworks so we could add obj-c and swift 3.0 pods
 use_frameworks!
 
-
 target 'AnimatableStackView_Example' do
     pod 'AnimatableStackView', :path => '../'
 end
-
 
 post_install do |installer|
     # Add podInstall.command and podUpdate.command shell scripts to Pods project

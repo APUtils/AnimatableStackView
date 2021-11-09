@@ -1,15 +1,22 @@
 PODS:
-  - AnimatableStackView (4.0.5)
+  - AnimatableStackView (4.0.5):
+    - RoutableLogger
+  - RoutableLogger (9.1.10)
 
 DEPENDENCIES:
   - AnimatableStackView (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - RoutableLogger
 
 EXTERNAL SOURCES:
   AnimatableStackView:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: 23ec16ad5319d3041fe3da5dc80357458396cadb
+  AnimatableStackView: 201f0bdda1a0c62dd4134d4687ab3b282b0a8eac
+  RoutableLogger: 5bfbffe104a5b9edd805909212130029721ee8f8
 
 PODFILE CHECKSUM: 36a318544ea31311e57902e6e497e4291d087628
 

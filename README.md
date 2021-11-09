@@ -28,6 +28,8 @@ Cartfile:
 github "APUtils/AnimatableStackView" ~> 4.0
 ```
 
+You should later add both `AnimatableStackView` and `RoutableLogger` frameworks to your project.
+
 #### CocoaPods
 
 AnimatableStackView is available through [CocoaPods](http://cocoapods.org). To install

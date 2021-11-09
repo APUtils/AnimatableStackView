@@ -22,22 +22,13 @@ UIStackView based class that provides a convenience interface to animate its con
                        DESC
 
   s.homepage         = 'https://github.com/APUtils/AnimatableStackView'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Anton Plebanovich' => 'anton.plebanovich@gmail.com' }
   s.source           = { :git => 'https://github.com/APUtils/AnimatableStackView.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
   s.swift_versions = ['5.0']
-
   s.source_files = 'AnimatableStackView/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'AnimatableStackView' => ['AnimatableStackView/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation', 'UIKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'RoutableLogger'
 end

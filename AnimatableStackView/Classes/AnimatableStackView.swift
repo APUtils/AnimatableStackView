@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RoutableLogger
 import UIKit
 
 /// Subview that can be created with view model and has an ID.
@@ -280,6 +281,6 @@ private final class ViewsPool {
 
 private func checkID(subview: AnimatableStackView_Subview, viewModel: AnimatableStackView_ViewModel) {
     if subview.id != viewModel.id {
-        print("[AnimatableStackView] ERROR: View should have the same ID as view model after configuration. Please check. View ID '\(subview.id)' != view model ID '\(viewModel.id)'")
+        RoutableLogger.logError("View should have the same ID as view model after configuration", data: ["subviewID": subview.id, "viewModelID": viewModel.id, "subview": subview, "viewModel": viewModel])
     }
 }

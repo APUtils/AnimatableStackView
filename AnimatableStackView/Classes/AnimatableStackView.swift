@@ -18,6 +18,14 @@ public protocol AnimatableStackView_ViewModel: Identifiable {
     var animatableStackViewClass: AnimatableStackView_Subview.Type { get }
 }
 
+public extension AnimatableStackView_ViewModel {
+    
+    /// Creates view configures with `self`.
+    func createConfiguredView() -> AnimatableStackView_Subview {
+        animatableStackViewClass.create(viewModel: self)
+    }
+}
+
 /// Ordinary stack view that supports animations.
 /// Just perform changes using `update(viewModels:postLayout:)`
 /// and then call `view.layoutIfNeeded()` inside animation block.
@@ -270,7 +278,7 @@ private final class ViewsPool {
         } else {
             var view: AnimatableStackView.Subview!
             UIView.performWithoutAnimation {
-                view = viewModel.animatableStackViewClass.create(viewModel: viewModel)
+                view = viewModel.createConfiguredView()
                 onCreation(view)
                 checkID(subview: view, viewModel: viewModel)
             }

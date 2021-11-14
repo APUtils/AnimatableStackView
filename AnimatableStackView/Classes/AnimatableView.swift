@@ -24,6 +24,14 @@ public protocol AnimatableView_ViewModel: Identifiable {
 }
 
 public extension AnimatableView_ViewModel {
+    
+    /// Creates view configures with `self`.
+    func createConfiguredView() -> AnimatableView_Subview {
+        animatableViewClass.create(viewModel: self)
+    }
+}
+
+public extension AnimatableView_ViewModel {
     func hasChanges(from viewModel: Any?) -> Bool { true }
 }
 
@@ -357,7 +365,7 @@ private final class ViewsPool {
             /// Create new configured view and return.
             var view: AnimatableView.Subview!
             UIView.performWithoutAnimation {
-                view = viewModel.animatableViewClass.create(viewModel: viewModel)
+                view = viewModel.createConfiguredView()
                 
                 // View will be managed by constraints so make sure mask is disabled
                 if view.translatesAutoresizingMaskIntoConstraints {

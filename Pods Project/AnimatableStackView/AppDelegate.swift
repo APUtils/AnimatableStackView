@@ -1,14 +1,16 @@
 //
 //  AppDelegate.swift
-//  AnimatableStackView
+//  AnimatableStackView-Example
 //
-//  Created by Anton Plebanovich on 07/09/2019.
-//  Copyright (c) 2019 Anton Plebanovich. All rights reserved.
+//  Created by Anton Plebanovich on 4/12/19.
+//  Copyright © 2019 Anton Plebanovich. All rights reserved.
 //
 
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    static let shared: AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var window: UIWindow?
 }
+

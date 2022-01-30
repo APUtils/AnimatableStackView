@@ -115,11 +115,9 @@ open class AnimatableView: UIView {
             // Prepare for animation if needed
             if isAnimating {
                 view.performNonAnimatedForInvisible {
-                    let y = previousView == self ? 0 : previousView.frame.maxY
+                    let y = previousView === self ? 0 : previousView.frame.maxY
                     if hasChanges {
-                        let height = view.fixedSystemLayoutSizeFitting(.init(width: bounds.width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: .init(0.001)).height
-                        let frame = CGRect(x: 0, y: y, width: bounds.width, height: height)
-                        view.frame = frame
+                        view.layoutHeight(y: y, width: bounds.width)
                         view.layoutSubviewsOnly()
                     } else {
                         view.frame.origin.y = y
@@ -176,7 +174,10 @@ open class AnimatableView: UIView {
             } else {
                 
                 // Reuse or creation
-                view = viewsPool.getConfiguredView(viewModel: viewModel, onCreation: { view in
+                view = viewsPool.getConfiguredView(viewModel: viewModel,
+                                                   width: bounds.width,
+                                                   onCreation: { view in
+                    
                     afterReuse(view: view, previousView: previousView, hasChanges: true, isAnimating: isAnimating)
                     
                     // Insert at 0 so new views will slide from under existing ones.
@@ -184,6 +185,7 @@ open class AnimatableView: UIView {
                     
                     constraints.append(view.leadingAnchor.constraint(equalTo: leadingAnchor))
                     constraints.append(view.trailingAnchor.constraint(equalTo: trailingAnchor))
+                    
                 }, beforeReuse: beforeReuse, afterReuse: { afterReuse(view: $0, previousView: previousView, hasChanges: $1, isAnimating: isAnimating) })
                 
                 view.animateFadeInIfNeeded()
@@ -328,7 +330,11 @@ private final class ViewsPool {
         }
     }
     
-    func getConfiguredView(viewModel: AnimatableView.ViewModel, onCreation: ViewClosure = { _ in }, beforeReuse: ViewClosure = { _ in }, afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview {
+    func getConfiguredView(viewModel: AnimatableView.ViewModel,
+                           width: CGFloat,
+                           onCreation: ViewClosure = { _ in },
+                           beforeReuse: ViewClosure = { _ in },
+                           afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview {
         
         if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
@@ -373,6 +379,10 @@ private final class ViewsPool {
                     view.translatesAutoresizingMaskIntoConstraints = false
                 }
                 
+                // We need to layout because view might be of a wrong size after creation and configuration
+                view.layoutHeight(width: width)
+                view.layoutSubviewsOnly()
+                
                 onCreation(view)
             }
             return view
@@ -390,110 +400,6 @@ extension Sequence {
             guard let (key, value) = try transform(element) else { return }
             
             dictionary[key] = value
-        }
-    }
-}
-
-private var c_fadedOutAssociationKey = 0
-
-private extension UIView {
-    
-    static var isAnimating: Bool { inheritedAnimationDuration > 0 }
-    
-    /// Returns `true` if view can be animated.
-    /// That means `window` is not `nil` and application state is `.active`.
-    var isAnimatable: Bool {
-        return window != nil && UIApplication.shared.applicationState == .active
-    }
-    
-    func animateFadeInIfNeeded() {
-        // Nothing to animate if not visible or not animatable
-        guard UIView.isAnimating, isVisible, isAnimatable else { return }
-        
-        layer.removeAnimation(forKey: "opacity")
-        let originalAlpha = alpha
-        UIView.performWithoutAnimation {
-            alpha = 0
-        }
-        alpha = originalAlpha
-    }
-    
-    var originalAlpha: CGFloat? {
-        get {
-            return objc_getAssociatedObject(self, &c_fadedOutAssociationKey) as? CGFloat
-        }
-        set {
-            objc_setAssociatedObject(self, &c_fadedOutAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    func performNonAnimatedForInvisible(_ closure: () -> Void) {
-        if let presentation = layer.presentation() {
-            if presentation.isHidden || presentation.opacity < 0.01 {
-                // Invisible during animation
-                layer.removeAllAnimationsRecursively()
-                UIView.performWithoutAnimation {
-                    closure()
-                }
-            } else {
-                closure()
-            }
-            
-        } else {
-            // No presentation layer for some reason
-            if isVisible {
-                // Just visible
-                closure()
-                
-            } else {
-                // Just invisible
-                UIView.performWithoutAnimation {
-                    closure()
-                }
-            }
-        }
-    }
-    
-    @available(iOS 8.0, *)
-    func fixedSystemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-        
-        if constraints.isEmpty {
-            let width: CGFloat
-            if targetSize.width > intrinsicContentSize.width {
-                if contentHuggingPriority(for: .horizontal) > horizontalFittingPriority {
-                    width = intrinsicContentSize.width
-                } else {
-                    width = targetSize.width
-                }
-                
-            } else {
-                if contentCompressionResistancePriority(for: .horizontal) > horizontalFittingPriority {
-                    width = intrinsicContentSize.width
-                } else {
-                    width = targetSize.width
-                }
-            }
-            
-            let height: CGFloat
-            if targetSize.height > intrinsicContentSize.height {
-                if contentHuggingPriority(for: .vertical) > verticalFittingPriority {
-                    height = intrinsicContentSize.height
-                } else {
-                    height = targetSize.height
-                }
-                
-            } else {
-                if contentCompressionResistancePriority(for: .vertical) > verticalFittingPriority {
-                    height = intrinsicContentSize.height
-                } else {
-                    height = targetSize.height
-                }
-            }
-            
-            return .init(width: width, height: height)
-            
-        } else {
-            return systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
         }
     }
 }

@@ -216,6 +216,11 @@ open class AnimatableStackView: UIStackView {
     
     // ******************************* MARK: - Other Public Methods
     
+    /// Find view that corresponds to passed ID.
+    open func getView(id: String) -> Subview? {
+        return views.first { $0.id == id }
+    }
+    
     /// Find view that corresponds to passed identity. E.g. you can pass view model and get view for that.
     open func getView(identity: Identifiable) -> Subview? {
         return views.first { $0.id == identity.id }

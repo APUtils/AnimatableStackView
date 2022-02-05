@@ -137,7 +137,7 @@ open class AnimatableView: UIView {
         }
         
         // Reusing views with the same ID first
-        let existingReusableViews: [String: Subview] = viewModels.dictionaryMap { viewModel in
+        var existingReusableViews: [String: Subview] = viewModels.dictionaryMap { viewModel in
             if let view = viewsPool.getExistingNonConfiguredView(viewModel: viewModel) {
                 return (viewModel.id, view)
             } else {
@@ -163,6 +163,7 @@ open class AnimatableView: UIView {
                 
             } else if let existingReusableView = existingReusableViews[viewModel.id] {
                 // Reuse existing
+                existingReusableViews[viewModel.id] = nil
                 existingReusableView.performNonAnimatedForInvisible {
                     beforeReuse(view: existingReusableView)
                     if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {

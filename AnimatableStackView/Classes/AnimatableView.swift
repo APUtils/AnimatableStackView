@@ -198,14 +198,14 @@ open class AnimatableView: UIView {
             }
             
             let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-            view.constraintFromTopIfNeeded(to: previousView, anchor: anchor, in: self).flatMap { constraints.append($0) }
+            view.constraintFromTopIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
             
             previousView = view
             newViews.append(view)
         }
         
         let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-        constraintFromBottomIfNeeded(to: previousView, anchor: anchor, in: self).flatMap { constraints.append($0) }
+        constraintFromBottomIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
         
         NSLayoutConstraint.activate(constraints)
         
@@ -266,7 +266,7 @@ private extension UIView {
         }
     }
     
-    func constraintFromTopIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor, in hostView: UIView) -> NSLayoutConstraint? {
+    func constraintFromTopIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
         if let existingConstraint = topConstraint {
             if existingConstraint.secondItem !== view || !existingConstraint.isActive {
                 existingConstraint.isActive = false
@@ -282,7 +282,7 @@ private extension UIView {
         }
     }
     
-    func constraintFromBottomIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor, in hostView: UIView) -> NSLayoutConstraint? {
+    func constraintFromBottomIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
         if let existingConstraint = bottomConstraint {
             if existingConstraint.secondItem !== view {
                 existingConstraint.isActive = false

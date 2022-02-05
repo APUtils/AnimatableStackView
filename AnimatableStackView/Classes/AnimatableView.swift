@@ -129,6 +129,13 @@ open class AnimatableView: UIView {
             }
         }
         
+        let ids = viewModels.map { $0.id }
+        let uniqueIDs = Set(ids)
+        if uniqueIDs.count < ids.count {
+            let duplicatedIDs = ids.filter { !uniqueIDs.contains($0) }
+            RoutableLogger.logError("Some view models have the same ID. That's prohibited. Please fix.", data: ["duplicatedIDs": duplicatedIDs])
+        }
+        
         // Reusing views with the same ID first
         let existingReusableViews: [String: Subview] = viewModels.dictionaryMap { viewModel in
             if let view = viewsPool.getExistingNonConfiguredView(viewModel: viewModel) {

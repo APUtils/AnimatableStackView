@@ -98,7 +98,7 @@ open class AnimatableView: UIView {
     /// Views will be reused or created whenever needed and properly attached so animation will be smooth.
     ///
     /// - warning: View model and view (after configuration) IDs should match for the reuse logic to work. Basicaly, you should just return view model's ID after your view was configured with it.
-    open func update(viewModels: [ViewModel]) {
+    open func update(viewModels: [ViewModel], file: String = #file, function: String = #function, line: UInt = #line) {
         
         func beforeReuse(view: UIView) {
             // Restore original alpha
@@ -137,7 +137,11 @@ open class AnimatableView: UIView {
                 guard let index = duplicatedIDs.firstIndex(of: uniqueID) else { return }
                 duplicatedIDs.remove(at: index)
             }
-            RoutableLogger.logError("Some view models have the same ID. That's prohibited. Please fix.", data: ["ids": ids, "uniqueIDs": uniqueIDs, "duplicatedIDs": duplicatedIDs])
+            RoutableLogger.logError("Some view models have the same ID. That's prohibited. Please fix.",
+                                    data: ["ids": ids, "uniqueIDs": uniqueIDs, "duplicatedIDs": duplicatedIDs],
+                                    file: file,
+                                    function: function,
+                                    line: line)
         }
         
         // Reusing views with the same ID first

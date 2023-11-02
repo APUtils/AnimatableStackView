@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AnimatableStackView
+import AnimatableView
 
 
 private var c_viewModelAssociationKey = 0

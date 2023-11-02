@@ -4,26 +4,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "AnimatableStackView",
+    name: "AnimatableView",
     platforms: [
         .iOS(.v9),
         .tvOS(.v9),
     ],
     products: [
         .library(
-            name: "AnimatableStackView",
-            targets: ["AnimatableStackView"]),
+            name: "AnimatableView",
+            targets: ["AnimatableView"]),
     ],
     dependencies: [
         .package(url: "https://github.com/anton-plebanovich/RoutableLogger.git", .upToNextMajor(from: "1.0.0")),
     ],
     targets: [
         .target(
-            name: "AnimatableStackView",
+            name: "AnimatableView",
             dependencies: [
                 .product(name: "RoutableLogger", package: "RoutableLogger"),
             ],
-            path: "AnimatableStackView/Classes",
+            path: "AnimatableView/Classes",
             exclude: []),
     ]
 )

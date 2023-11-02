@@ -6,7 +6,7 @@
 //  Copyright © 2020 Anton Plebanovich. All rights reserved.
 //
 
-import AnimatableStackView
+import AnimatableView
 import Foundation
 
 final class HideableViewModel: AnimatableView_ViewModel {

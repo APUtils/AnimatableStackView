@@ -6,7 +6,7 @@ install! 'cocoapods', :warn_for_unused_master_specs_repo => false
 use_frameworks!
 
 target 'AnimatableStackView_Example' do
-    pod 'AnimatableStackView', :path => '../'
+    pod 'AnimatableView', :path => '../'
     
     pod 'APExtensions'
 end

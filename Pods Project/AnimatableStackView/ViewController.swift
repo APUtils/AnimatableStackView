@@ -8,7 +8,7 @@
 
 import APExtensions
 import UIKit
-import AnimatableStackView
+import AnimatableView
 
 final class ViewController: UIViewController {
     

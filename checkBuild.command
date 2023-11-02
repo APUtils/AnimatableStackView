@@ -9,7 +9,7 @@ echo ""
 echo ""
 echo -e "Checking Carthage integrity..."
 pbxproj_path='Carthage Project/AnimatableStackView.xcodeproj/project.pbxproj'
-swift_files=$(find 'AnimatableStackView/Classes' -type f -name "*.swift" | grep -o "[0-9a-zA-Z+ ]*.swift" | sort -fu)
+swift_files=$(find 'AnimatableView/Classes' -type f -name "*.swift" | grep -o "[0-9a-zA-Z+ ]*.swift" | sort -fu)
 swift_files_count=$(echo "${swift_files}" | wc -l | tr -d ' ')
 
 build_section_id=$(sed -n -e '/\/\* AnimatableStackView \*\/ = {/,/};/p' "${pbxproj_path}" | sed -n '/PBXNativeTarget/,/Sources/p' | tail -1 | tr -d "\t" | cut -d ' ' -f 1)
@@ -27,7 +27,7 @@ fi
 echo ""
 
 echo -e "Building Swift Package..."
-xcodebuild -scheme 'AnimatableStackView' -destination 'name=SE' | xcpretty
+xcodebuild -scheme 'AnimatableView' -destination 'name=SE' | xcpretty
 echo ""
 
 echo "Building Pods project..."

@@ -1,6 +1,6 @@
 # Change Log
 All notable changes to this project will be documented in this file.
-`AnimatableStackView` adheres to [Semantic Versioning](http://semver.org/).
+`AnimatableView` adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [6.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/6.0.0)

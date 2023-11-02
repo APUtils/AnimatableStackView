@@ -1,5 +1,5 @@
 PODS:
-  - AnimatableStackView (5.0.0):
+  - AnimatableView (6.0.0):
     - RoutableLogger
   - APExtensions (14.0.1):
     - APExtensions/Core (= 14.0.1)
@@ -13,7 +13,7 @@ PODS:
   - RoutableLogger (12.3.3)
 
 DEPENDENCIES:
-  - AnimatableStackView (from `../`)
+  - AnimatableView (from `../`)
   - APExtensions
 
 SPEC REPOS:
@@ -22,14 +22,14 @@ SPEC REPOS:
     - RoutableLogger
 
 EXTERNAL SOURCES:
-  AnimatableStackView:
+  AnimatableView:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AnimatableStackView: e5da399b0f46422c0e1e2c2b1b2109bae0da7d69
+  AnimatableView: ce8633183c219ee46ff073597c9bddb2d716d41f
   APExtensions: cbc845eab2425fbbb80e6eaee8d51425bda42e5e
   RoutableLogger: ff5425f9ec26ec79241a591a1ed16a7a69d70b2f
 
-PODFILE CHECKSUM: caf8625a38ca816245a5653e78377e9fb80c1a17
+PODFILE CHECKSUM: 035e9a6c227edd5e799d807ccd4237afb1042f37
 
 COCOAPODS: 1.13.0

@@ -235,13 +235,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AnimatableStackView_Example/Pods-AnimatableStackView_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/APExtensions/APExtensions.framework",
-				"${BUILT_PRODUCTS_DIR}/AnimatableStackView/AnimatableStackView.framework",
+				"${BUILT_PRODUCTS_DIR}/AnimatableView/AnimatableView.framework",
 				"${BUILT_PRODUCTS_DIR}/RoutableLogger/RoutableLogger.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APExtensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AnimatableStackView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AnimatableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RoutableLogger.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

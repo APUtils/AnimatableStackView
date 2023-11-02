@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 `AnimatableStackView` adheres to [Semantic Versioning](http://semver.org/).
 
+
+## [6.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/6.0.0)
+Released on 2023-11-02.
+
+#### Changed
+- Spec name `AnimatableStackView` > `AnimatableView`
+- iOS 12.0 min
+
+#### Removed
+- AnimatableStackView
+
+
 ## [5.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/5.0.0)
 Released on 2023-11-02.
 

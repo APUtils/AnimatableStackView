@@ -9,7 +9,7 @@
 import AnimatableStackView
 import UIKit
 
-final class HideableView: UIView, AnimatableStackView_Subview, AnimatableView_Subview {
+final class HideableView: UIView, AnimatableView_Subview {
     
     var animatableViewModel: Any?
     

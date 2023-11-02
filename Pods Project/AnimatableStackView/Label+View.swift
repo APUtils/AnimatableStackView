@@ -11,7 +11,7 @@ import AnimatableStackView
 
 
 private var c_viewModelAssociationKey = 0
-extension UILabel: AnimatableStackView_Subview, AnimatableView_Subview {
+extension UILabel: AnimatableView_Subview {
     
     private var _viewModel: String? {
         get {
@@ -49,17 +49,11 @@ extension UILabel: AnimatableStackView_Subview, AnimatableView_Subview {
     
 }
 
-extension String: AnimatableStackView_ViewModel {
-    public var animatableStackViewClass: AnimatableStackView_Subview.Type {
-        return UILabel.self
-    }
+extension String: AnimatableView_ViewModel {
     
     public var id: String {
         return self
     }
-}
-
-extension String: AnimatableView_ViewModel {
     
     public func copy() -> String {
         self

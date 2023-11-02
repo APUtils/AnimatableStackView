@@ -34,12 +34,13 @@
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB04990418B63A353F13A8CF /* Pods-AnimatableStackView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimatableStackView_Example.release.xcconfig"; path = "Target Support Files/Pods-AnimatableStackView_Example/Pods-AnimatableStackView_Example.release.xcconfig"; sourceTree = "<group>"; };
-		E20E88F82AAD73AA001AF3A7 /* AnimatableStackView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = AnimatableStackView.podspec; path = ../AnimatableStackView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E20E88F82AAD73AA001AF3A7 /* AnimatableView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = AnimatableView.podspec; path = ../AnimatableView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E2B8F74F2AF4188E00927967 /* DEPLOY PROCESS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "DEPLOY PROCESS.md"; path = "../DEPLOY PROCESS.md"; sourceTree = "<group>"; };
 		E2B8F7502AF4189900927967 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		E2B8F7512AF418C300927967 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E2B8F7522AF41C0B00927967 /* checkBuild.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = checkBuild.command; path = ../checkBuild.command; sourceTree = "<group>"; };
 		E2B8F7532AF41C8700927967 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
+		E2B8F7542AF421BD00927967 /* podPush.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = podPush.command; path = ../podPush.command; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* _ */,
-				607FACD21AFB9204008FA782 /* Example for AnimatableStackView */,
+				607FACD21AFB9204008FA782 /* Example for AnimatableView */,
 				607FACD11AFB9204008FA782 /* Products */,
 				860F5F092EBFFB247359AD6E /* Pods */,
 				98B671FDC656995ED5AB7F2B /* Frameworks */,
@@ -81,7 +82,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		607FACD21AFB9204008FA782 /* Example for AnimatableStackView */ = {
+		607FACD21AFB9204008FA782 /* Example for AnimatableView */ = {
 			isa = PBXGroup;
 			children = (
 				B06688E51F13EAB800A02878 /* _Gifs */,
@@ -97,7 +98,7 @@
 				0DE859C027A6987400A2DEF7 /* LaunchScreen.storyboard */,
 				0DE859BE27A6987400A2DEF7 /* Main.storyboard */,
 			);
-			name = "Example for AnimatableStackView";
+			name = "Example for AnimatableView";
 			path = AnimatableStackView;
 			sourceTree = "<group>";
 		};
@@ -112,12 +113,13 @@
 		607FACF51AFB993E008FA782 /* _ */ = {
 			isa = PBXGroup;
 			children = (
-				E20E88F82AAD73AA001AF3A7 /* AnimatableStackView.podspec */,
+				E20E88F82AAD73AA001AF3A7 /* AnimatableView.podspec */,
 				E2B8F7502AF4189900927967 /* CHANGELOG.md */,
 				E2B8F7522AF41C0B00927967 /* checkBuild.command */,
 				E2B8F74F2AF4188E00927967 /* DEPLOY PROCESS.md */,
 				E2B8F7532AF41C8700927967 /* Package.swift */,
 				E2B8F7512AF418C300927967 /* README.md */,
+				E2B8F7542AF421BD00927967 /* podPush.command */,
 			);
 			name = _;
 			sourceTree = "<group>";

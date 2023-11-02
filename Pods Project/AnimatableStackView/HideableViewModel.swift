@@ -9,10 +9,9 @@
 import AnimatableStackView
 import Foundation
 
-final class HideableViewModel: AnimatableStackView_ViewModel, AnimatableView_ViewModel {
+final class HideableViewModel: AnimatableView_ViewModel {
     
     let animatableViewClass: AnimatableView_Subview.Type = HideableView.self
-    let animatableStackViewClass: AnimatableStackView_Subview.Type = HideableView.self
     var color: UIColor = UIColor.random
     var id: String = UUID().uuidString
     var isHidden: Bool = true

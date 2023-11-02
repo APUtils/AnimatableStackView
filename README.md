@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/AnimatableStackView.svg?style=flat)](http://cocoapods.org/pods/AnimatableStackView)
 [![CI Status](http://img.shields.io/travis/APUtils/AnimatableStackView.svg?style=flat)](https://travis-ci.org/APUtils/AnimatableStackView)
 
-UIStackView based class that allows to animate its changes. Curently supports vertical animations only.
+AnimatableView that works like a UIStackView but has better animations
 
 ## Example
 
@@ -18,33 +18,21 @@ Clone the repo and then open `Carthage Project/AnimatableStackView.xcodeproj`
 
 ## Installation
 
-#### Carthage
-
-Please check [official guide](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos)
-
-Cartfile:
-
-```
-github "APUtils/AnimatableStackView" ~> 5.0
-```
-
-You should later add both `AnimatableStackView` and `RoutableLogger` frameworks to your project.
-
 #### CocoaPods
 
 AnimatableStackView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AnimatableStackView', '~> 5.0'
+pod 'AnimatableView', '~> 6.0'
 ```
 
 ## Usage
 
-Just call `.configure(viewModels:)` method with new view models and then perform layout inside animation block:
+Just call `.update(viewModels:)` method with new view models and then perform layout inside animation block:
 ```swift
 UIView.animate(withDuration: 2) {
-    self.animatableView.configure(viewModels: self.vms1)
+    self.animatableView.update(viewModels: self.vms1)
     self.view.layoutIfNeeded()
 }
 ```

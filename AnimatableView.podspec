@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AnimatableStackView'
-  s.version          = '5.0.0'
-  s.summary          = 'UIStackView based class that allows to animate its changes. Curently supports vertical animations only.'
+  s.name             = 'AnimatableView'
+  s.version          = '6.0.0'
+  s.summary          = 'AnimatableView that works like a UIStackView but has better animations'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -26,9 +26,9 @@ UIStackView based class that provides a convenience interface to animate its con
   s.author           = { 'Anton Plebanovich' => 'anton.plebanovich@gmail.com' }
   s.source           = { :git => 'https://github.com/APUtils/AnimatableStackView.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
   s.swift_versions = ['5.0']
-  s.source_files = 'AnimatableStackView/Classes/**/*'
+  s.source_files = 'AnimatableView/Classes/**/*'
   s.frameworks = 'Foundation', 'UIKit'
   s.dependency 'RoutableLogger'
 end

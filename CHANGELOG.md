@@ -2,6 +2,71 @@
 All notable changes to this project will be documented in this file.
 `AnimatableStackView` adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/5.0.0)
+Released on 2023-11-02.
+
+#### Added
+- Accessibility ID for zero height view
+- Added postLayout parameter for update call
+- Added reusable views pool to improve performance
+- Allow to search views by ID
+- AnimatableView .getView(identity:)
+- AnimatableView as simplified and more performant version of AnimatableStackView with slightly different animations
+- AnimatableView spec
+- Autoresize mask disable info log
+- Duplicated IDs error
+- Duplicated IDs report
+- Error logs to RoutableLogger
+- Example for pods project
+- ID mismatch checks
+- RoutableLogger dependency
+- SPM support
+
+#### Changed
+- configure -> update
+- Disable autoresize mask for animatable view subviews
+- Excessive params remove
+- Force stack view and subviews layout during animation to know final positions
+- Helper method to create configured view from view model
+- Increased amounts of VMs for tests
+- iOS 11.0 minimum
+- Made view pools local
+- Optimized view remove
+- Preserve frame origin Y during layouts
+- Scripts update
+- Slightly changed protocols
+- viewModel -> animatableViewModel
+
+#### Fixed
+- AnimatableView reuse crash fix
+- Build
+- Carthage
+- CI
+- Documentation warnings
+- Fixed configuration and fade out alphas conflict
+- Fixed existing view reconfiguration
+- Fixed invisible view reuse
+- Fixed layout flow in non-animation closure during animation
+- Prevent double reuse
+- Scripts
+- Tests
+- View layout on creation fix
+- View reconfiguration fix
+- Warnings
+
+#### Improved
+- Better code reuse
+- Better error log for duplicate IDs
+- Improved reconfiguration animation during reuse for animatable view
+- Improved views reuse for animatable view
+- Initial update optimizations
+- Non-animated update optimization
+- Safer subviews-only layout
+- Simplified AnimatableView_ViewModel conformance
+- Simplified checking for changes method
+- Slightly improved getting view from a pool
+- Using constraint for zero height view as more robust solution
+
 ## [4.0.5](https://github.com/APUtils/AnimatableStackView/releases/tag/4.0.5)
 Released on 09/04/2020.
 

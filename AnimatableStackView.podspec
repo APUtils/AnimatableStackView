@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AnimatableStackView'
-  s.version          = '4.0.5'
+  s.version          = '5.0.0'
   s.summary          = 'UIStackView based class that allows to animate its changes. Curently supports vertical animations only.'
 
 # This description is used to generate tags and improve search results.

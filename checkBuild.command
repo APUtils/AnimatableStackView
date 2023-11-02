@@ -27,8 +27,7 @@ fi
 echo ""
 
 echo -e "Building Swift Package..."
-swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.4-simulator"
-swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk appletvsimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-tvos14.3-simulator"
+xcodebuild -scheme 'AnimatableStackView' -destination 'name=SE' | xcpretty
 echo ""
 
 echo "Building Pods project..."

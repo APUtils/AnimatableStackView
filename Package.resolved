@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "RoutableLogger",
+        "repositoryURL": "https://github.com/anton-plebanovich/RoutableLogger.git",
+        "state": {
+          "branch": null,
+          "revision": "754e0972cbf364e3bdfc27a0ad618eae50b6ef4c",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

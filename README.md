@@ -25,7 +25,7 @@ Please check [official guide](https://github.com/Carthage/Carthage#if-youre-buil
 Cartfile:
 
 ```
-github "APUtils/AnimatableStackView" ~> 4.0
+github "APUtils/AnimatableStackView" ~> 5.0
 ```
 
 You should later add both `AnimatableStackView` and `RoutableLogger` frameworks to your project.
@@ -36,7 +36,7 @@ AnimatableStackView is available through [CocoaPods](http://cocoapods.org). To i
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AnimatableStackView', '~> 4.0'
+pod 'AnimatableStackView', '~> 5.0'
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ pod 'AnimatableStackView', '~> 4.0'
 Just call `.configure(viewModels:)` method with new view models and then perform layout inside animation block:
 ```swift
 UIView.animate(withDuration: 2) {
-    self.stackView.configure(viewModels: self.vms1)
+    self.animatableView.configure(viewModels: self.vms1)
     self.view.layoutIfNeeded()
 }
 ```

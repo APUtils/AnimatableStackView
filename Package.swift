@@ -15,11 +15,14 @@ let package = Package(
             targets: ["AnimatableStackView"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/anton-plebanovich/RoutableLogger.git", .upToNextMajor(from: "1.0.0")),
     ],
     targets: [
         .target(
             name: "AnimatableStackView",
-            dependencies: [],
+            dependencies: [
+                .product(name: "RoutableLogger", package: "RoutableLogger"),
+            ],
             path: "AnimatableStackView/Classes",
             exclude: []),
     ]

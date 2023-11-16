@@ -331,21 +331,20 @@ private final class ViewsPool {
     typealias ViewClosure = (AnimatableView.Subview) -> Void
     typealias HasChangesClosure = (AnimatableView.Subview, Bool) -> Void
     
-    // TODO: Can be improved by using dictionary but we need a performant way of converting `viewClass` to a hash.
-    private var views: [AnimatableView.Subview] = []
-    
-    func add(_ view: AnimatableView.Subview) {
-        self.views.append(view)
-    }
+    private var views: [String: AnimatableView.Subview] = [:]
     
     func add(_ views: [AnimatableView.Subview]) {
-        self.views.append(contentsOf: views)
+        views.forEach { add($0) }
+    }
+    
+    func add(_ view: AnimatableView.Subview) {
+        self.views[view.id] = view
     }
     
     func getExistingNonConfiguredView(viewModel: AnimatableView.ViewModel) -> AnimatableView.Subview? {
-        if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
+        if let existingView = views[viewModel.id] {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
-            let existingView = views.remove(at: existingViewIndex)
+            views[viewModel.id] = nil
             return existingView
             
         } else {
@@ -359,9 +358,9 @@ private final class ViewsPool {
                            beforeReuse: ViewClosure = { _ in },
                            afterReuse: HasChangesClosure = { _, _ in }) -> AnimatableView.Subview {
         
-        if let existingViewIndex = views.firstIndex(where: { $0.id == viewModel.id }) {
+        if let existingView = views[viewModel.id] {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
-            let existingView = views.remove(at: existingViewIndex)
+            views[viewModel.id] = nil
             existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
@@ -375,11 +374,10 @@ private final class ViewsPool {
             }
             return existingView
             
-        } else if let existingView = views.reversed().first(where: { type(of: $0) == viewModel.animatableViewClass }) {
+        } else if let existingPair = views.reversed().first(where: { type(of: $0) == viewModel.animatableViewClass }) {
             /// Found reusable view of the same class. Reconfigure and use.
-            if let existingViewIndex = views.firstIndex(where: { $0 === existingView }) {
-                views.remove(at: existingViewIndex)
-            }
+            views[existingPair.key] = nil
+            let existingView = existingPair.value
             
             existingView.performNonAnimatedForInvisible {
                 beforeReuse(existingView)

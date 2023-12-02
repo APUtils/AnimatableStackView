@@ -20,7 +20,10 @@ extension UIView {
         ).height
         
         let frame = CGRect(x: 0, y: y, width: width, height: height)
-        self.frame = frame
+        
+        if self.frame != frame {
+            self.frame = frame
+        }
     }
     
     /// Preserve view's size using autoresizing mask during layout.

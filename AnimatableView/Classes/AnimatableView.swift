@@ -56,6 +56,8 @@ open class AnimatableView: UIView {
     /// and their position and order might be ambiguous in that state.
     public private(set) var visibleViews: [Subview] = []
     
+    public private(set) var visibleViewById: [String: Subview] = [:]
+    
     /// - warning: You should not check `subviews` property since it contains reusable and invisible views
     /// and their position and order might be ambiguous in that state.
     open override var subviews: [UIView] { super.subviews }
@@ -156,12 +158,13 @@ open class AnimatableView: UIView {
         let isAnimating = UIView.isAnimating
         let previousViews = visibleViews
         var newViews: [Subview] = []
+        var newViewsById: [String: Subview] = [:]
         var previousView: UIView = self
         var constraints: [NSLayoutConstraint] = []
         
         viewModels.forEach { viewModel in
             var view: Subview!
-            if let existingView = visibleViews.first(where: { $0.id == viewModel.id }) {
+            if let existingView = visibleViewById[viewModel.id] {
                 // Update
                 view = existingView
                 if viewModel.hasChanges(from: existingView.animatableViewModel) {
@@ -218,6 +221,7 @@ open class AnimatableView: UIView {
             
             previousView = view
             newViews.append(view)
+            newViewsById[view.id] = view
         }
         
         let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
@@ -227,7 +231,7 @@ open class AnimatableView: UIView {
         
         /// Find removed views
         let removedViews = previousViews
-            .filter { previousView in !newViews.contains { $0 === previousView } }
+            .filter { previousView in newViewsById[previousView.id] == nil }
         
         /// Fade out
         removedViews.forEach {
@@ -240,6 +244,7 @@ open class AnimatableView: UIView {
         viewsPool.add(removedViews)
         
         visibleViews = newViews
+        visibleViewById = newViewsById
     }
     
     // ******************************* MARK: - Other Public Methods

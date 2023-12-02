@@ -81,13 +81,49 @@ open class AnimatableView: UIView {
     }
     
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
-        clipsToBounds = true
+        if clipsToBounds == false {
+            RoutableLogger.logInfo("It might make sense to enable clip to bounds for the animatable view: \(description)")
+        }
+        
+        setContentHuggingPriority(.required, for: .vertical)
+        setContentCompressionResistancePriority(.required, for: .vertical)
     }
     
     // ******************************* MARK: - UIView Overrides
     
-    open override var intrinsicContentSize: CGSize { .zero }
+    open override var intrinsicContentSize: CGSize {
+        if let lastView = visibleViews.last {
+            return CGSize(width: bounds.width, height: lastView.frame.maxY)
+        } else {
+            return CGSize(width: bounds.width, height: 0)
+        }
+    }
+    
+    open override func layoutSubviews() {
+        let width = bounds.width
+        var minY: CGFloat = 0
+        let previousMaxY = visibleViews.last?.frame.maxY ?? 0
+        
+        for view in visibleViews {
+            // We need to recompute child height on width change
+            if view.frame.width != width {
+                view.layoutHeight(y: minY, width: bounds.width)
+                
+            } else {
+                let height = view.frame.height
+                let frame = CGRect(x: 0, y: minY, width: width, height: height)
+                if frame != view.frame {
+                    view.frame = frame
+                }
+            }
+            
+            minY = view.frame.maxY
+        }
+        
+        if previousMaxY != visibleViews.last?.frame.maxY ?? 0 {
+            invalidateIntrinsicContentSize()
+        }
+    }
     
     // ******************************* MARK: - Methods
     
@@ -120,7 +156,6 @@ open class AnimatableView: UIView {
                     let y = previousView === self ? 0 : previousView.frame.maxY
                     if hasChanges {
                         view.layoutHeight(y: y, width: bounds.width)
-                        view.layoutSubviewsOnly()
                     } else {
                         view.frame.origin.y = y
                     }
@@ -160,7 +195,6 @@ open class AnimatableView: UIView {
         var newViews: [Subview] = []
         var newViewsById: [String: Subview] = [:]
         var previousView: UIView = self
-        var constraints: [NSLayoutConstraint] = []
         
         viewModels.forEach { viewModel in
             var view: Subview!
@@ -169,6 +203,7 @@ open class AnimatableView: UIView {
                 view = existingView
                 if viewModel.hasChanges(from: existingView.animatableViewModel) {
                     view.configure(viewModel: viewModel)
+                    view.layoutHeight(y: view.frame.minY, width: bounds.width)
                     checkID(subview: view, viewModel: viewModel)
                 }
                 
@@ -202,9 +237,6 @@ open class AnimatableView: UIView {
                     // Insert at 0 so new views will slide from under existing ones.
                     insertSubview(view, at: 0)
                     
-                    constraints.append(view.leadingAnchor.constraint(equalTo: leadingAnchor))
-                    constraints.append(view.trailingAnchor.constraint(equalTo: trailingAnchor))
-                    
                 }, beforeReuse: beforeReuse, afterReuse: { afterReuse(view: $0, previousView: previousView, hasChanges: $1, isAnimating: isAnimating) })
                 
                 view.animateFadeInIfNeeded()
@@ -216,18 +248,17 @@ open class AnimatableView: UIView {
                 return
             }
             
-            let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-            view.constraintFromTopIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
+            if previousView === self {
+                view.frame.origin.y = 0
+            } else {
+                view.frame.origin.y = previousView.frame.maxY
+            }
             
             previousView = view
+            
             newViews.append(view)
             newViewsById[view.id] = view
         }
-        
-        let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-        constraintFromBottomIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
-        
-        NSLayoutConstraint.activate(constraints)
         
         /// Find removed views
         let removedViews = previousViews
@@ -245,6 +276,10 @@ open class AnimatableView: UIView {
         
         visibleViews = newViews
         visibleViewById = newViewsById
+        
+        if bounds.maxY != visibleViews.last?.frame.maxY ?? 0 {
+            invalidateIntrinsicContentSize()
+        }
     }
     
     // ******************************* MARK: - Other Public Methods
@@ -261,62 +296,6 @@ open class AnimatableView: UIView {
         return subviews
             .compactMap { $0 as? Subview }
             .first { $0.id == identity.id }
-    }
-}
-
-private var c_topConstraintAssociationKey = 0
-private var c_bottomConstraintAssociationKey = 0
-
-private extension UIView {
-    
-    private var topConstraint: NSLayoutConstraint? {
-        get {
-            return objc_getAssociatedObject(self, &c_topConstraintAssociationKey) as? NSLayoutConstraint
-        }
-        set {
-            objc_setAssociatedObject(self, &c_topConstraintAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    private var bottomConstraint: NSLayoutConstraint? {
-        get {
-            return objc_getAssociatedObject(self, &c_bottomConstraintAssociationKey) as? NSLayoutConstraint
-        }
-        set {
-            objc_setAssociatedObject(self, &c_bottomConstraintAssociationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    func constraintFromTopIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
-        if let existingConstraint = topConstraint {
-            if existingConstraint.secondItem !== view || !existingConstraint.isActive {
-                existingConstraint.isActive = false
-                topConstraint = topAnchor.constraint(equalTo: anchor)
-                return topConstraint
-            } else {
-                return nil
-            }
-            
-        } else {
-            topConstraint = topAnchor.constraint(equalTo: anchor)
-            return topConstraint
-        }
-    }
-    
-    func constraintFromBottomIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
-        if let existingConstraint = bottomConstraint {
-            if existingConstraint.secondItem !== view {
-                existingConstraint.isActive = false
-                bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
-                return bottomConstraint
-            } else {
-                return nil
-            }
-            
-        } else {
-            bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
-            return bottomConstraint
-        }
     }
 }
 
@@ -399,15 +378,19 @@ private final class ViewsPool {
             UIView.performWithoutAnimation {
                 view = viewModel.createConfiguredView()
                 
-                // View will be managed by constraints so make sure mask is disabled
-                if view.translatesAutoresizingMaskIntoConstraints {
-                    RoutableLogger.logInfo("Autoresizing mask will be disabled for a view: \(view.description)")
-                    view.translatesAutoresizingMaskIntoConstraints = false
+                // View will be managed by autoresize mask so make sure it's enabled
+                if view.translatesAutoresizingMaskIntoConstraints == false {
+                    RoutableLogger.logInfo("Autoresizing mask will be enabled and adjusted for the view: \(view.description)")
+                    view.autoresizingMask = []
+                    view.translatesAutoresizingMaskIntoConstraints = true
+                    
+                } else if view.autoresizingMask != [] {
+                    RoutableLogger.logInfo("Autoresizing mask will be adjusted for the view: \(view.description)")
+                    view.autoresizingMask = []
                 }
                 
                 // We need to layout because view might be of a wrong size after creation and configuration
                 view.layoutHeight(width: width)
-                view.layoutSubviewsOnly()
                 
                 onCreation(view)
             }

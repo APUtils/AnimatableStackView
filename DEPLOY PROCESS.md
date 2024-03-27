@@ -1,6 +1,7 @@
 - Run `Example` project and check that animation is correct
 - Change version in podspec
 - Run `podUpdate.command`
+- Run `packageUpdate.command`
 - Update CHANGELOG.md
 - Update README.md with new version if needed
 - Run `checkBuild.command`

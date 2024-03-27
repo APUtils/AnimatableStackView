@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 `AnimatableView` adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [6.0.2](https://github.com/APUtils/AnimatableStackView/releases/tag/6.0.2)
+Released on 2024-03-27.
+
+#### Added
+- Compute accessibility identifier from dependant views if needed
+- `PrivacyInfo.xcprivacy` resource for cocoapods and SPM
+
+#### Improved
+- Views reuse optmization
+- Other performance optimizations
+
+
 ## [6.0.0](https://github.com/APUtils/AnimatableStackView/releases/tag/6.0.0)
 Released on 2023-11-02.
 

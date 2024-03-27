@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,8 +6,8 @@ import PackageDescription
 let package = Package(
     name: "AnimatableView",
     platforms: [
-        .iOS(.v9),
-        .tvOS(.v9),
+        .iOS(.v12),
+        .tvOS(.v12),
     ],
     products: [
         .library(
@@ -23,7 +23,12 @@ let package = Package(
             dependencies: [
                 .product(name: "RoutableLogger", package: "RoutableLogger"),
             ],
-            path: "AnimatableView/Classes",
-            exclude: []),
+            path: "AnimatableView",
+            exclude: [],
+            sources: ["Classes"],
+            resources: [
+                .process("Privacy/PrivacyInfo.xcprivacy")
+            ]
+        ),
     ]
 )

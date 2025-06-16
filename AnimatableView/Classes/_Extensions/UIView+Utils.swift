@@ -10,10 +10,10 @@ import UIKit
 
 extension UIView {
     
-    var isVisible: Bool { !isHidden && alpha >= 0.01 }
+    var _isVisible: Bool { !isHidden && alpha >= 0.01 }
     
-    func layoutHeight(y: CGFloat = 0, width: CGFloat) {
-        let height = fixedSystemLayoutSizeFitting(
+    func _layoutHeight(y: CGFloat = 0, width: CGFloat) {
+        let height = _fixedSystemLayoutSizeFitting(
             .init(width: width, height: 0),
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .init(0.001)
@@ -27,10 +27,10 @@ extension UIView {
     }
     
     /// Preserve view's size using autoresizing mask during layout.
-    func layoutSubviewsOnly() {
+    func _layoutSubviewsOnly() {
         guard !subviews.isEmpty else { return }
         
-        let activeOuterConstraints = getOuterConstraints().filter { $0.isActive }
+        let activeOuterConstraints = _getOuterConstraints().filter { $0.isActive }
         
         // Disable outer constraints to prevent broken constraints during layout
         if !activeOuterConstraints.isEmpty {
@@ -54,33 +54,33 @@ extension UIView {
     }
     
     /// Get all constraints to `self` from outer view hierarchy.
-    func getOuterConstraints() -> [NSLayoutConstraint] {
-        superviews
-            .flatMap { $0.constraints(to: self) }
+    func _getOuterConstraints() -> [NSLayoutConstraint] {
+        _superviews
+            .flatMap { $0._constraints(to: self) }
             .sorted { $0.priority > $1.priority }
     }
     
     /// Returns contraints to a `view` that source view owns.
     /// - Parameter view: A view to use for a check.
-    func constraints(to view: UIView) -> [NSLayoutConstraint] {
+    func _constraints(to view: UIView) -> [NSLayoutConstraint] {
         constraints.filter { $0.firstItem === view || $0.secondItem === view }
     }
     
 #if compiler(>=5)
     /// All view superviews to the top most
-    var superviews: DropFirstSequence<UnfoldSequence<UIView, (UIView?, Bool)>> {
+    var _superviews: DropFirstSequence<UnfoldSequence<UIView, (UIView?, Bool)>> {
         return sequence(first: self, next: { $0.superview }).dropFirst(1)
     }
 #else
     /// All view superviews to the top most
-    var superviews: AnySequence<UIView> {
+    var _superviews: AnySequence<UIView> {
         return sequence(first: self, next: { $0.superview }).dropFirst(1)
     }
 #endif
     
-    var allSubviews: [UIView] {
+    var _allSubviews: [UIView] {
         var allSubviews = self.subviews
-        allSubviews.forEach { allSubviews.append(contentsOf: $0.allSubviews) }
+        allSubviews.forEach { allSubviews.append(contentsOf: $0._allSubviews) }
         return allSubviews
     }
 }
@@ -90,17 +90,17 @@ private var c_fadedOutAssociationKey = 0
 
 extension UIView {
     
-    static var isAnimating: Bool { inheritedAnimationDuration > 0 }
+    static var _isAnimating: Bool { inheritedAnimationDuration > 0 }
     
     /// Returns `true` if view can be animated.
     /// That means `window` is not `nil` and application state is `.active`.
-    var isAnimatable: Bool {
+    var _isAnimatable: Bool {
         return window != nil && UIApplication.shared.applicationState == .active
     }
     
-    func animateFadeInIfNeeded() {
+    func _animateFadeInIfNeeded() {
         // Nothing to animate if not visible or not animatable
-        guard UIView.isAnimating, isVisible, isAnimatable else { return }
+        guard UIView._isAnimating, _isVisible, _isAnimatable else { return }
         
         layer.removeAnimation(forKey: "opacity")
         let originalAlpha = alpha
@@ -110,7 +110,7 @@ extension UIView {
         alpha = originalAlpha
     }
     
-    var originalAlpha: CGFloat? {
+    var _originalAlpha: CGFloat? {
         get {
             return objc_getAssociatedObject(self, &c_fadedOutAssociationKey) as? CGFloat
         }
@@ -119,11 +119,11 @@ extension UIView {
         }
     }
     
-    func performNonAnimatedForInvisible(_ closure: () -> Void) {
+    func _performNonAnimatedForInvisible(_ closure: () -> Void) {
         if let presentation = layer.presentation() {
             if presentation.isHidden || presentation.opacity < 0.01 {
                 // Invisible during animation
-                layer.removeAllAnimationsRecursively()
+                layer._removeAllAnimationsRecursively()
                 UIView.performWithoutAnimation {
                     closure()
                 }
@@ -133,7 +133,7 @@ extension UIView {
             
         } else {
             // No presentation layer for some reason
-            if isVisible {
+            if _isVisible {
                 // Just visible
                 closure()
                 
@@ -147,7 +147,7 @@ extension UIView {
     }
     
     @available(iOS 8.0, *)
-    func fixedSystemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    func _fixedSystemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         
         if constraints.isEmpty {
             let width: CGFloat

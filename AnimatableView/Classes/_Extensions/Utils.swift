@@ -14,7 +14,7 @@ final class Utils {
     /// - parameters:
     ///   - delay: number of seconds to delay
     ///   - closure: the closure to be executed
-    static func performInMain(_ delay: TimeInterval = 0, closure: @escaping () -> Void) {
+    static func _performInMain(_ delay: TimeInterval = 0, closure: @escaping () -> Void) {
         if delay <= 0, Thread.isMainThread {
             closure()
             

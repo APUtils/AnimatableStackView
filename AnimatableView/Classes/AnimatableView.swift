@@ -104,23 +104,23 @@ open class AnimatableView: UIView {
         
         func beforeReuse(view: UIView) {
             // Restore original alpha
-            if let originalAlpha = view.originalAlpha {
+            if let originalAlpha = view._originalAlpha {
                 view.alpha = originalAlpha
-                view.originalAlpha = nil
+                view._originalAlpha = nil
             }
         }
         
         func afterReuse(view: UIView, previousView: UIView, hasChanges: Bool, isAnimating: Bool) {
             // Ignore invisible views
-            guard view.isVisible else { return }
+            guard view._isVisible else { return }
             
             // Prepare for animation if needed
             if isAnimating {
-                view.performNonAnimatedForInvisible {
+                view._performNonAnimatedForInvisible {
                     let y = previousView === self ? 0 : previousView.frame.maxY
                     if hasChanges {
-                        view.layoutHeight(y: y, width: bounds.width)
-                        view.layoutSubviewsOnly()
+                        view._layoutHeight(y: y, width: bounds.width)
+                        view._layoutSubviewsOnly()
                     } else {
                         view.frame.origin.y = y
                     }
@@ -147,7 +147,7 @@ open class AnimatableView: UIView {
         }
         
         // Reusing views with the same ID first
-        var existingReusableViews: [String: Subview] = viewModels.dictionaryMap { viewModel in
+        var existingReusableViews: [String: Subview] = viewModels._dictionaryMap { viewModel in
             if let view = viewsPool.getExistingNonConfiguredView(viewModel: viewModel) {
                 return (viewModel.id, view)
             } else {
@@ -155,7 +155,7 @@ open class AnimatableView: UIView {
             }
         }
         
-        let isAnimating = UIView.isAnimating
+        let isAnimating = UIView._isAnimating
         let previousViews = visibleViews
         var newViews: [Subview] = []
         var newViewsById: [String: Subview] = [:]
@@ -175,7 +175,7 @@ open class AnimatableView: UIView {
             } else if let existingReusableView = existingReusableViews[viewModel.id] {
                 // Reuse existing
                 existingReusableViews[viewModel.id] = nil
-                existingReusableView.performNonAnimatedForInvisible {
+                existingReusableView._performNonAnimatedForInvisible {
                     beforeReuse(view: existingReusableView)
                     if viewModel.hasChanges(from: existingReusableView.animatableViewModel as? AnimatableView.ViewModel) {
                         existingReusableView.configure(viewModel: viewModel)
@@ -188,7 +188,7 @@ open class AnimatableView: UIView {
                 }
                 
                 view = existingReusableView
-                view.animateFadeInIfNeeded()
+                view._animateFadeInIfNeeded()
                 
             } else {
                 
@@ -207,17 +207,17 @@ open class AnimatableView: UIView {
                     
                 }, beforeReuse: beforeReuse, afterReuse: { afterReuse(view: $0, previousView: previousView, hasChanges: $1, isAnimating: isAnimating) })
                 
-                view.animateFadeInIfNeeded()
+                view._animateFadeInIfNeeded()
             }
             
             // Return an invisible view to the views pool
-            guard view.isVisible else {
+            guard view._isVisible else {
                 viewsPool.add(view)
                 return
             }
             
             let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-            view.constraintFromTopIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
+            view._constraintFromTopIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
             
             previousView = view
             newViews.append(view)
@@ -225,7 +225,7 @@ open class AnimatableView: UIView {
         }
         
         let anchor = previousView === self ? topAnchor : previousView.bottomAnchor
-        constraintFromBottomIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
+        _constraintFromBottomIfNeeded(to: previousView, anchor: anchor).flatMap { constraints.append($0) }
         
         NSLayoutConstraint.activate(constraints)
         
@@ -235,8 +235,8 @@ open class AnimatableView: UIView {
         
         /// Fade out
         removedViews.forEach {
-            if $0.isVisible {
-                $0.originalAlpha = $0.alpha
+            if $0._isVisible {
+                $0._originalAlpha = $0.alpha
                 $0.alpha = 0
             }
         }
@@ -269,7 +269,7 @@ private var c_bottomConstraintAssociationKey = 0
 
 private extension UIView {
     
-    private var topConstraint: NSLayoutConstraint? {
+    private var _topConstraint: NSLayoutConstraint? {
         get {
             return objc_getAssociatedObject(self, &c_topConstraintAssociationKey) as? NSLayoutConstraint
         }
@@ -278,7 +278,7 @@ private extension UIView {
         }
     }
     
-    private var bottomConstraint: NSLayoutConstraint? {
+    private var _bottomConstraint: NSLayoutConstraint? {
         get {
             return objc_getAssociatedObject(self, &c_bottomConstraintAssociationKey) as? NSLayoutConstraint
         }
@@ -287,35 +287,35 @@ private extension UIView {
         }
     }
     
-    func constraintFromTopIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
-        if let existingConstraint = topConstraint {
+    func _constraintFromTopIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
+        if let existingConstraint = _topConstraint {
             if existingConstraint.secondItem !== view || !existingConstraint.isActive {
                 existingConstraint.isActive = false
-                topConstraint = topAnchor.constraint(equalTo: anchor)
-                return topConstraint
+                _topConstraint = topAnchor.constraint(equalTo: anchor)
+                return _topConstraint
             } else {
                 return nil
             }
             
         } else {
-            topConstraint = topAnchor.constraint(equalTo: anchor)
-            return topConstraint
+            _topConstraint = topAnchor.constraint(equalTo: anchor)
+            return _topConstraint
         }
     }
     
-    func constraintFromBottomIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
-        if let existingConstraint = bottomConstraint {
+    func _constraintFromBottomIfNeeded(to view: UIView, anchor: NSLayoutYAxisAnchor) -> NSLayoutConstraint? {
+        if let existingConstraint = _bottomConstraint {
             if existingConstraint.secondItem !== view {
                 existingConstraint.isActive = false
-                bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
-                return bottomConstraint
+                _bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
+                return _bottomConstraint
             } else {
                 return nil
             }
             
         } else {
-            bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
-            return bottomConstraint
+            _bottomConstraint = bottomAnchor.constraint(equalTo: anchor)
+            return _bottomConstraint
         }
     }
 }
@@ -325,7 +325,7 @@ private extension CGFloat {
     /// Returns this value rounded to a pixel value using the specified rounding rule.
     /// Uses `.toNearestOrAwayFromZero` by default.
     /// - returns: The integral value found by rounding using rule.
-    func roundedToPixel(_ rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) -> CGFloat {
+    func _roundedToPixel(_ rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero) -> CGFloat {
         let scale = UIScreen.main.scale
         return (self * scale).rounded(rule) / scale
     }
@@ -366,7 +366,7 @@ private final class ViewsPool {
         if let existingView = views[viewModel.id] {
             /// Found reusable view with the same ID. Checking if it requires reconfiguration.
             views[viewModel.id] = nil
-            existingView.performNonAnimatedForInvisible {
+            existingView._performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 if viewModel.hasChanges(from: existingView.animatableViewModel as? AnimatableView.ViewModel) {
                     existingView.configure(viewModel: viewModel)
@@ -384,7 +384,7 @@ private final class ViewsPool {
             views[existingPair.key] = nil
             let existingView = existingPair.value
             
-            existingView.performNonAnimatedForInvisible {
+            existingView._performNonAnimatedForInvisible {
                 beforeReuse(existingView)
                 existingView.configure(viewModel: viewModel)
                 afterReuse(existingView, true)
@@ -406,8 +406,8 @@ private final class ViewsPool {
                 }
                 
                 // We need to layout because view might be of a wrong size after creation and configuration
-                view.layoutHeight(width: width)
-                view.layoutSubviewsOnly()
+                view._layoutHeight(width: width)
+                view._layoutSubviewsOnly()
                 
                 onCreation(view)
             }
@@ -421,7 +421,7 @@ private final class ViewsPool {
 
 extension Sequence {
     
-    @inlinable func dictionaryMap<T, U>(_ transform: (_ element: Iterator.Element) throws -> (T, U)?) rethrows -> [T: U] {
+    @inlinable func _dictionaryMap<T, U>(_ transform: (_ element: Iterator.Element) throws -> (T, U)?) rethrows -> [T: U] {
         return try self.reduce(into: [T: U]()) { dictionary, element in
             guard let (key, value) = try transform(element) else { return }
             
@@ -432,9 +432,9 @@ extension Sequence {
 
 extension CALayer {
     
-    func removeAllAnimationsRecursively() {
+    func _removeAllAnimationsRecursively() {
         removeAllAnimations()
-        sublayers?.forEach { $0.removeAllAnimationsRecursively() }
+        sublayers?.forEach { $0._removeAllAnimationsRecursively() }
     }
 }
 

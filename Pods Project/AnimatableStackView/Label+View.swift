@@ -11,7 +11,10 @@ import AnimatableView
 
 
 private var c_viewModelAssociationKey = 0
-extension UILabel: AnimatableView_Subview {
+extension UILabel: @retroactive Identifiable {}
+extension UILabel: @retroactive CreatableWithViewModel {}
+extension UILabel: @retroactive ConfigurableWithViewModel {}
+extension UILabel: @retroactive AnimatableView_Subview {
     
     private var _viewModel: String? {
         get {
@@ -49,7 +52,8 @@ extension UILabel: AnimatableView_Subview {
     
 }
 
-extension String: AnimatableView_ViewModel {
+extension String: @retroactive Identifiable {}
+extension String: @retroactive AnimatableView_ViewModel {
     
     public var id: String {
         return self
